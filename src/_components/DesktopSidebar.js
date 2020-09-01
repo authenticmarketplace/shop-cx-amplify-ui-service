@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { device } from '../_components/MediaQueries.js';
 import { Link } from 'react-router-dom'
@@ -83,13 +83,13 @@ const Img = styled.img`
 `;
 
 const DesktopSidebar = (props) => {
-    const hotitems = props.hotitems.slice(0, 3);
+    const [hotitems, setHotItems] = useState(props.hotitems.slice(0, 3));
 
     return (
         <SideBarPanel>
             <StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo>
             <HotItemSection>
-                <h4>Hot Items</h4>
+                <h4>VIP</h4>
                 {hotitems.map((item) => {
                     return (
                         <div key={item.id}>
@@ -106,9 +106,9 @@ const DesktopSidebar = (props) => {
                 })}
             </HotItemSection>
             <SideBarButtonsSection>
-                <SidebarButton>New Releases</SidebarButton>
+                <SidebarButton>Recently Viewed</SidebarButton>
                 <SidebarButton>Pre-Orders</SidebarButton>
-                <SidebarButton>Saved Brands</SidebarButton>
+                <SidebarButton>Favorite Brands</SidebarButton>
             </SideBarButtonsSection>
         </SideBarPanel>
     )

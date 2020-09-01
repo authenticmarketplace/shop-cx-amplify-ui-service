@@ -30,9 +30,9 @@ export const img = {
 
 export const tempImg = {
     bw1,
-    bw3,
+    bw3: 'https://img.ltwebstatic.com/images2_pi/2019/08/01/15646299774036473004_thumbnail_405x552.webp',
     bw4: 'https://images.squarespace-cdn.com/content/v1/5dfaf6a456ec6a5746549d42/1589687148304-C9SO3W3NFHNJQTHK0HPK/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0s0XaMNjCqAzRibjnE_wBlkZ2axuMlPfqFLWy-3Tjp4nKScCHg1XF4aLsQJlo6oYbA/IMG_0349.JPG?format=500w',
-    bw5,
+    bw5: 'https://img.ltwebstatic.com/images3_pi/2020/03/24/1585016692ba9f99561df62eaf22cdc6ad86a43453_thumbnail_900x.webp',
     fenty1,
     jfg1,
     ninabailey1,
