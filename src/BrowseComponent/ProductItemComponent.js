@@ -83,7 +83,7 @@ const ProductItemComponent = (props) => {
     return (
         <ProductWrapper>
             <ProductImgWrapper>
-                <ProductImg src={props.item.image} alt="product"/>
+                <ProductImg src={props.item.images[0]} alt="product"/>
             </ProductImgWrapper>
             <ProductContentWrapper>
                 <div style={{display: 'flex'}}>
@@ -91,8 +91,8 @@ const ProductItemComponent = (props) => {
                         <h2>${props.item.price}</h2>
                     </div>
                     <div style={{paddingLeft: '15px'}}>
-                        <h3>{props.item.title}</h3>
-                        <p>{props.item.brand.name}</p>
+                        <h3>{props.item.name}</h3>
+                        {props.item.brand ? <p>{props.item.brand.displayName}</p> : <React.Fragment/>}
                     </div>
                 </div>
             </ProductContentWrapper>

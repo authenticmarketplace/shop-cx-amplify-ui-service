@@ -83,28 +83,35 @@ const Img = styled.img`
 `;
 
 const DesktopSidebar = (props) => {
-    const [hotitems, setHotItems] = useState(props.hotitems.slice(0, 3));
+    const [hotitems, setHotItems] = useState([]);
+
+    useEffect(() => {
+        setHotItems(props.hotitems.slice(9, 12))
+    }, [props])
 
     return (
         <SideBarPanel>
             <StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo>
-            <HotItemSection>
-                <h4>VIP</h4>
-                {hotitems.map((item) => {
-                    return (
-                        <div key={item.id}>
-                            <Link to={{
-                                        pathname: `/product/${item.id}`,
-                                        state: {
-                                            item
-                                        }
-                                    }} key={item.id}>
-                                <HotItem src={item.image} />
-                            </Link>
-                        </div>
-                    )
-                })}
-            </HotItemSection>
+            {hotitems.length > 0 ? 
+                <HotItemSection>
+                    <h4>VIP</h4>
+                    {hotitems.map((item) => {
+                        return (
+                            <div key={item.productID}>
+                                <Link to={{
+                                            pathname: `/product/${item.productID}`,
+                                            state: {
+                                                item
+                                            }
+                                        }} key={item.productID}>
+                                    <HotItem src={item.images[0]} />
+                                </Link>
+                            </div>
+                        )
+                    })}
+                </HotItemSection> :
+                <React.Fragment />
+            }
             <SideBarButtonsSection>
                 <SidebarButton>Recently Viewed</SidebarButton>
                 <SidebarButton>Pre-Orders</SidebarButton>

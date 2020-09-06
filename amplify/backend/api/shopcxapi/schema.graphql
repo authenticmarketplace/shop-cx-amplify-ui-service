@@ -1,0 +1,35 @@
+type Product @model 
+@key(fields: ["productID"])
+@key(name: "brandIDIndex", fields: ["brandID"])
+@key(name: "byPrice", fields: ["baseType", "price"], queryField: "byPrice")
+@key(name: "byIdentityOrientation", fields: ["identityOrientation",], queryField: "byIdentityOrientation")
+@key(name: "byIdentityOrientationByCategory", fields: ["identityOrientation", "category"], queryField: "byIdentityOrientationByCategory")
+@key(name: "byCategoryByPrice", fields: ["category", "price"], queryField: "byCategoryByPrice")
+{
+  productID: ID!
+  name: String!
+  price: Float!
+  productCaption: String!
+  additionalDetails: String
+  images: [String!]!
+  category: String!
+  identityOrientation: String!
+  inventory: Int!
+  brandID: ID!
+  brand: Brand @connection(fields: ["brandID"])
+  baseType: String!
+}
+
+type Brand @model 
+@key(fields: ["brandID"])
+@key(name: "byLocale", fields: ["locale"], queryField: "byLocale")
+@key(name: "byDesignation", fields: ["designation"], queryField: "byDesignation")
+{
+  brandID: ID!
+  displayName: String!
+  locale: String!
+  designation: String!
+  bio: String!
+  logo: String
+  products: [Product] @connection(keyName:"brandIDIndex", fields: ["brandID"])
+}

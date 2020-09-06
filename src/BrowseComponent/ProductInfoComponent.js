@@ -198,19 +198,18 @@ const MoreProducts = styled.div`
 
 const ProductInfoComponent = (props) => {
     const { item } = props.location.state;
-    console.log(item);
     return (
         <div style={{fontFamily: 'Baloo Tamma 2, sans-serif'}}>
         <HeaderMenu link="/browse" linktext="Browse" columnmenu={true} />
             <StyledSection>
               <Container>
                 <ProductRow>
-                    <Img src={item.image} alt="product" />
+                    <Img src={item.images[0]} alt="product" />
                     <ProductContentWrapper>
                       <ProductContent>
                         <h2>${item.price}</h2>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
+                        <h3>{item.name}</h3>
+                        <p>{item.productCaption}</p>
                         <button><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
                       </ProductContent>
                     </ProductContentWrapper>
@@ -222,14 +221,14 @@ const ProductInfoComponent = (props) => {
                 <MoreDetailsWrapper>                   
                   <BrandDetails>
                   {/* <span style={{cursor: 'pointer',fontSize: '12px', fontWeight: '500', borderRadius: '16px', border: '1px solid white', padding: '0px 5px'}}>+</span> */}
-                    <h3>{item.brand.name}</h3>
-                    <p><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {item.brand.label}</p>
+                    <h3>{item.brand.displayName}</h3>
+                    <p><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {item.brand.designation}</p>
                     <p><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {item.brand.locale}</p>
-                    <p>{item.brand.about}</p>
+                    <p>{item.brand.bio}</p>
                   </BrandDetails>                    
                   <MoreProducts>
                     <h4>More Like This</h4>
-                    {item.brand.products.map((product, i) => {
+                    {/* {item.brand.products.map((product, i) => {
                       return (
                         <React.Fragment>
                         <Link to={{
@@ -245,7 +244,7 @@ const ProductInfoComponent = (props) => {
                         </Link>
                         </React.Fragment>
                       )
-                    })}
+                    })} */}
                   </MoreProducts>                  
                 </MoreDetailsWrapper>
               </ProductContainer>
