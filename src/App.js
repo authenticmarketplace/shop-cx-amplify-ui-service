@@ -18,7 +18,7 @@ function App() {
           <Route path="/browse" component={BrowseComponent} />
           <Route path="/foryou" component={ForYouComponent} />
           <Route path="/mystore" component={MyStoreComponent} />
-          <Route path="/product/:productId" component={ProductInfoComponent} />
+          <Route path="/product/:productID" component={ProductInfoComponent} id=":productID" />
         </Switch>
       </Router>
     </div>

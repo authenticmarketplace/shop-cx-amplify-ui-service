@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
+import { API } from 'aws-amplify';
+import { byIdentityOrientation, getProduct } from '../graphql/queries.js';
 import styled from 'styled-components';
 import { img } from '../img/index.js';
 import { device } from '../_components/MediaQueries.js';
@@ -76,7 +78,7 @@ const ProductContent = styled.div`
     background-color: #282828;
     text-align: center;
     color: white;
-    font-family: 'Baloo Tamma 2', sans-serif;
+    font-family: 'Poppins', sans-serif;
     box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
               0 2px 2px rgba(0,0,0,0.12), 
               0 4px 4px rgba(0,0,0,0.12);
@@ -196,61 +198,127 @@ const MoreProducts = styled.div`
   }
 `;
 
+const initialState = {
+  item: {},
+  isLoading: true,
+  error: false
+}
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'SET_ITEM':
+      return { ...state, item: action.item, isLoading: false }
+    case 'ERROR':
+      return { ...state, error: true }
+    default:
+      return state
+  }
+}
+
 const ProductInfoComponent = (props) => {
-    const { item } = props.location.state;
-    return (
-        <div style={{fontFamily: 'Baloo Tamma 2, sans-serif'}}>
-        <HeaderMenu link="/browse" linktext="Browse" columnmenu={true} />
-            <StyledSection>
-              <Container>
-                <ProductRow>
-                    <Img src={item.images[0]} alt="product" />
-                    <ProductContentWrapper>
-                      <ProductContent>
-                        <h2>${item.price}</h2>
-                        <h3>{item.name}</h3>
-                        <p>{item.productCaption}</p>
-                        <button><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
-                      </ProductContent>
-                    </ProductContentWrapper>
-                </ProductRow>
-              </Container>
-            </StyledSection>
-            <StyledSection2>
-              <ProductContainer>
-                <MoreDetailsWrapper>                   
-                  <BrandDetails>
-                  {/* <span style={{cursor: 'pointer',fontSize: '12px', fontWeight: '500', borderRadius: '16px', border: '1px solid white', padding: '0px 5px'}}>+</span> */}
-                    <h3>{item.brand.displayName}</h3>
-                    <p><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {item.brand.designation}</p>
-                    <p><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {item.brand.locale}</p>
-                    <p>{item.brand.bio}</p>
-                  </BrandDetails>                    
-                  <MoreProducts>
-                    <h4>More Like This</h4>
-                    {/* {item.brand.products.map((product, i) => {
-                      return (
-                        <React.Fragment>
-                        <Link to={{
-                          pathname: `/product/${product.id}`,
-                          state: {
-                              item: item
-                              }
-                          }} key={product.id}>
-                          <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <img src={product.image} alt={product.title} />
-                            <p>{product.title}</p>
-                          </div>
-                        </Link>
-                        </React.Fragment>
-                      )
-                    })} */}
-                  </MoreProducts>                  
-                </MoreDetailsWrapper>
-              </ProductContainer>
-            </StyledSection2>
-        </div>
-    );
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const [more_products, setMoreProducts] = useState([]);
+  
+  const requestProduct = async (id) => {
+    try {
+      console.log("requesting product item from API")
+      const productData = await API.graphql({
+        query: getProduct,
+        variables: { productID: id }
+      })
+      dispatch({ type: 'SET_ITEM', item: productData.data.getProduct })
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }
+
+  const requestMoreProducts = async () => {
+    try {
+      console.log("requesting more products from API")
+      const productData = await API.graphql({
+        query: byIdentityOrientation,
+        variables: { identityOrientation: state.item.identityOrientation, limit: 4 }
+      })
+      setMoreProducts(productData.data.byIdentityOrientation.items);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    if(props.location.state === undefined) {
+      requestProduct(props.match.params.productID)
+    } else {
+      console.log("setting item from state")
+      dispatch({ type: 'SET_ITEM', item: props.location.state.item })
+    }
+  }, [])
+
+  useEffect(() => {
+    if(!state.isLoading) {
+      requestMoreProducts()
+    }
+  }, [state.isLoading])
+
+  return (   
+      <div style={{fontFamily: 'Poppins, sans-serif'}}>
+      <HeaderMenu link="/browse" linktext="Browse" columnmenu={true} />
+      {state.isLoading ? <h1>Loading...</h1> :
+      <React.Fragment> 
+        <StyledSection>
+          <Container>
+            <ProductRow>
+              <Img src={state.item.images[0]} alt="product" />
+              <ProductContentWrapper>
+                <ProductContent>
+                  <h2>${state.item.price}</h2>
+                  <h3>{state.item.name}</h3>
+                  <p>{state.item.productCaption}</p>
+                  <button><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
+                </ProductContent>
+              </ProductContentWrapper>
+            </ProductRow>
+          </Container>
+        </StyledSection>
+        <StyledSection2>
+          <ProductContainer>
+            <MoreDetailsWrapper>                   
+              <BrandDetails>
+              {/* <span style={{cursor: 'pointer',fontSize: '12px', fontWeight: '500', borderRadius: '16px', border: '1px solid white', padding: '0px 5px'}}>+</span> */}
+                <h3>{state.item.brand.displayName}</h3>
+                <h3><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {state.item.brand.designation}</h3>
+                <h3><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {state.item.brand.locale}</h3>
+                <p>{state.item.brand.bio}</p>
+              </BrandDetails>                    
+              <MoreProducts>
+                <h4>More Like This</h4>
+                {more_products.map((product) => {
+                  return (
+                    <React.Fragment key={product.productID}>
+                    <Link to={{
+                      pathname: `/product/${product.productID}`,
+                      state: {
+                          item: product
+                          }
+                      }} onClick={() => dispatch({ type: 'SET_ITEM', item: product })} style={{textDecoration: 'none'}} key={product.productID}>
+                      <div style={{display: 'flex', flexDirection: 'column', }}>
+                        <img src={product.images[0]} alt={product.name} />
+                        <p style={{textDecoration: 'none'}}>{product.name} <br/> <span style={{fontWeight: '600'}}>{product.brand.displayName}</span></p>
+                      </div>
+                    </Link>
+                    </React.Fragment>
+                  )
+                })}
+              </MoreProducts>                  
+            </MoreDetailsWrapper>
+          </ProductContainer>
+        </StyledSection2>
+      </React.Fragment>
+      }
+      </div>
+  );
 }
 
 export default ProductInfoComponent;

@@ -48,12 +48,12 @@ const ProductContentWrapper = styled.div`
     text-align: left;
     display: block;
     color: white;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: 8px solid #202020;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     h2 {
-        font-family: 'Lato', sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-weight: 600;
         background-color: white;
         margin-top: 6px;
@@ -91,8 +91,8 @@ const ProductItemComponent = (props) => {
                         <h2>${props.item.price}</h2>
                     </div>
                     <div style={{paddingLeft: '15px'}}>
-                        <h3>{props.item.name}</h3>
-                        {props.item.brand ? <p>{props.item.brand.displayName}</p> : <React.Fragment/>}
+                        {props.item.brand ? <h3>{props.item.brand.displayName}</h3> : <React.Fragment/>}
+                        <p style={{fontSize: '14px'}}>{props.item.category}</p>
                     </div>
                 </div>
             </ProductContentWrapper>

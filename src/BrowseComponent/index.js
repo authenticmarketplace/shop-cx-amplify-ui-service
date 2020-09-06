@@ -83,14 +83,15 @@ const BrowseComponent = () => {
       <React.Fragment>
         <DesktopSidebar hotitems={state.products}/>
         <HeaderMenu link="/" linktext="Menu"/>
+        {state.isLoading ? <h1>Loading...</h1> : 
         <StyledSection>
           <BrowseContainer>
             <ProductRow>
-              {state.products.map((item) => {
+              {state.products ? state.products.map((item) => {
                   return (
                     <div key={item.productID}>
                       <Link to={{
-                          pathname: `/product/${item.productId}`,
+                          pathname: `/product/${item.productID}`,
                           state: {
                               item,
                               state: state.products
@@ -100,13 +101,14 @@ const BrowseComponent = () => {
                       </Link>
                     </div>
                   )
-              })}
+              }) : request_products()}
             </ProductRow>
               {/* <div>
                   <h3 style={{backgroundColor: '#282828', display: 'inline-block', padding: '16px 18px', borderRadius: '20px', fontWeight: 'light'}}>End</h3>
               </div> */}
           </BrowseContainer>
         </StyledSection>
+        }
       </React.Fragment>
     );
 }
