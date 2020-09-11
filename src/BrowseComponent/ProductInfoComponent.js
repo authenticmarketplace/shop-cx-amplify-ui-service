@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
+import { useTransition, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 import { API } from 'aws-amplify';
 import { byIdentityOrientation, getProduct } from '../graphql/queries.js';
@@ -30,9 +31,17 @@ padding-top: 20px;
 margin: 0px;
 `;
 
+const ImgWrapper = styled(animated.div)`
+position: static;
+  padding: 0px;
+  margin: 0px;
+  will-change: transform, opacity;
+`;
+
 const Img = styled.img`
+  cursor: pointer;
   width: 300px; 
-  height: auto;
+  height: 100%;
   border-top-left-radius: 12px; 
   border-top-right-radius: 12px;
   @media ${device.mobileM} {
@@ -218,7 +227,15 @@ const reducer = (state, action) => {
 const ProductInfoComponent = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [more_products, setMoreProducts] = useState([]);
-  
+
+  const [sliderIndex, setSliderIndex] = useState(0)
+  const onSliderClick = useCallback(() => setSliderIndex(n => (n + 1) % state.item.images.length), [state.item])
+  const transitions = useTransition(sliderIndex, p => p, {
+    from: { opacity: 0.7 },
+    enter: { opacity: 1 },
+    leave: { display: 'none' },
+  })
+
   const requestProduct = async (id) => {
     try {
       console.log("requesting product item from API")
@@ -264,13 +281,23 @@ const ProductInfoComponent = (props) => {
 
   return (   
       <div style={{fontFamily: 'Poppins, sans-serif'}}>
-      <HeaderMenu link="/browse" linktext="Browse" columnmenu={true} />
+      <HeaderMenu link="/browse" linktext="Browse" columnmenu={true}/>
       {state.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 
         <StyledSection>
           <Container>
             <ProductRow>
-              <Img src={state.item.images[0]} alt="product" />
+            {transitions.map(({ item, props, key }) => {
+              console.log(props)
+              return (
+                <ImgWrapper style={props} onClick={onSliderClick} key={key}>
+                  <Img src={state.item.images[item]} style={{display:'block'}} alt="product" />
+                  <div style={{position: 'relative'}}>
+                    <p style={{margin: '0px',padding: '0px', position: 'absolute', bottom: '0', left: '50%', fontSize: '10px', transform: 'translate(-50%, -50%)'}}>Tap for more</p>
+                  </div>
+                </ImgWrapper>
+              )
+            })}
               <ProductContentWrapper>
                 <ProductContent>
                   <h2>${state.item.price}</h2>

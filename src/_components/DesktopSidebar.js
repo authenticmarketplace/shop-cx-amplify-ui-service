@@ -16,6 +16,13 @@ const SideBarPanel = styled.div`
     background-color: #151515;
     z-index: 1;
     color: white;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     h4 {
         text-transform: uppercase;
     }
@@ -35,7 +42,7 @@ const HotItem = styled.img`
     height: 60px;
     border-radius: 70px;
     margin: 5px 0px;
-    opacity: 0.7;
+    opacity: 1.0;
     background-color: white;
     padding: 10px;
     transition: 0.3s;

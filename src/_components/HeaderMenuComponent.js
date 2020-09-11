@@ -10,10 +10,12 @@ const DesktopMenu = styled(Menu)`
   padding-bottom: 26px;
   @media ${device.tablet} {
     display: block;
+    z-index: ${props => props.bringToTop}
   }
 `;
 
 const MobileMenu = styled(Menu)`
+  z-index: 1;
   display: flex;
   justify-content: space-around;
   @media ${device.tablet} {
@@ -77,6 +79,7 @@ const LogoDiv = styled.div`
 
 const HeaderMenuComponent = (props) => {
   const displaylogo = props.columnmenu ? 'flex' : 'none';
+  const bringToTop = props.columnmenu ? 1 : '';
     return (
     <MenuWrapper>
         <MobileMenu>
@@ -88,7 +91,7 @@ const HeaderMenuComponent = (props) => {
             <StyledLinkMobile to={props.link}>{props.linktext}</StyledLinkMobile>
           </ColRight>
         </MobileMenu>
-        <DesktopMenu>
+        <DesktopMenu bringToTop={bringToTop}>
           <LogoDiv displaylogo={displaylogo}>
             <img style={{height: '25px', display: 'inline-block', marginRight: '10px'}} src={img.circlelogo} alt="logo"/>
             <Link to="/"><Logo>Authentic.shop</Logo></Link>
