@@ -25,6 +25,7 @@ yarn-error.log*
 notes.txt
 tempProducts.js
 src/img
+mockProps
 
 
 #amplify

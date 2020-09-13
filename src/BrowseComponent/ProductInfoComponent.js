@@ -288,7 +288,6 @@ const ProductInfoComponent = (props) => {
           <Container>
             <ProductRow>
             {transitions.map(({ item, props, key }) => {
-              console.log(props)
               return (
                 <ImgWrapper style={props} onClick={onSliderClick} key={key}>
                   <Img src={state.item.images[item]} style={{display:'block'}} alt="product" />

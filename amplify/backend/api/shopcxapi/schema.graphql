@@ -27,8 +27,8 @@ type Brand @model
 {
   brandID: ID!
   displayName: String!
-  locale: String!
-  designation: String!
+  locale: String
+  designation: String
   bio: String!
   logo: String
   products: [Product] @connection(keyName:"brandIDIndex", fields: ["brandID"])

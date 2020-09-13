@@ -61,16 +61,26 @@ const BrowseComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const request_products = async () => {
-    try {
-      const products = await API.graphql({
-        query: listProducts
-      })
-      console.log("Completed Products Request - Products Retrieved @ " + Date.now())
-      dispatch({ type: 'SET_PRODUCTS', products: products.data.listProducts.items })
+    if(localStorage.productRequestCount && localStorage.productRequestCount < 100) {
+      dispatch({type: 'SET_PRODUCTS', products: JSON.parse(localStorage.allProducts)})
+      localStorage.productRequestCount++;
+      console.log("Set Products from Local Storage - Product Request Count is: " + localStorage.productRequestCount)
     }
-    catch(err) {
-      console.log(err);
-      dispatch({ type: 'ERROR' })
+    else {
+      try {
+        const products = await API.graphql({
+          query: listProducts
+        })
+        console.log("Completed Products Request via API - Products Retrieved @ " + Date.now())
+        dispatch({ type: 'SET_PRODUCTS', products: products.data.listProducts.items })
+        localStorage.allProducts = JSON.stringify(products.data.listProducts.items)
+        localStorage.productRequestCount = 1;
+        console.log("Created Product Request Count in Local Storage")
+      }
+      catch(err) {
+        console.log(err);
+        dispatch({ type: 'ERROR' })
+      }
     }
   }
 

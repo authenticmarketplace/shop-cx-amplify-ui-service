@@ -99,29 +99,31 @@ const DesktopSidebar = (props) => {
     return (
         <SideBarPanel>
             <StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo>
+            <HotItemSection>
+            <h4>VIP</h4>
             {hotitems.length > 0 ? 
-                <HotItemSection>
-                    <h4>VIP</h4>
+                <React.Fragment>
                     {hotitems.map((item) => {
                         return (
-                            <div key={item.productID}>
+                            <div data-testid="hotproduct" key={item.productID}>
                                 <Link to={{
                                             pathname: `/product/${item.productID}`,
                                             state: {
                                                 item
                                             }
-                                        }} key={item.productID}>
-                                    <HotItem src={item.images[0]} />
+                                        }} key={item.productID} data-testid="Hot Item Link">
+                                    <HotItem src={item.images[0]} alt="Hot Item" />
                                 </Link>
                             </div>
                         )
                     })}
-                </HotItemSection> :
+                </React.Fragment> :
                 <React.Fragment />
             }
+            </HotItemSection>
             <SideBarButtonsSection>
+                <SidebarButton>New Releases</SidebarButton>
                 <SidebarButton>Recently Viewed</SidebarButton>
-                <SidebarButton>Pre-Orders</SidebarButton>
                 <SidebarButton>Favorite Brands</SidebarButton>
             </SideBarButtonsSection>
         </SideBarPanel>
