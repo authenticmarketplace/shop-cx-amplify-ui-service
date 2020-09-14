@@ -8,6 +8,7 @@ import { img } from '../img/index.js';
 import { device } from '../_components/MediaQueries.js';
 import { Section, Container } from '../_components/styles.js';
 import HeaderMenu from '../_components/HeaderMenuComponent.js';
+import ShoppingBag from '../ShoppingBag/index.js';
 
 const StyledSection = styled(Section)`
   padding-top: 90px;
@@ -27,7 +28,7 @@ const ProductContainer = styled(Container)`
 `;
 
 const StyledSection2 = styled(Section)`
-padding-top: 20px;
+padding-top: 0px;
 margin: 0px;
 `;
 
@@ -306,6 +307,7 @@ const ProductInfoComponent = (props) => {
                 </ProductContent>
               </ProductContentWrapper>
             </ProductRow>
+            <ShoppingBag mode={'static'}/>
           </Container>
         </StyledSection>
         <StyledSection2>

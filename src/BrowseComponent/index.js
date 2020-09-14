@@ -4,6 +4,7 @@ import { API } from 'aws-amplify';
 import { listProducts } from '../graphql/queries.js';
 import HeaderMenu from '../_components/HeaderMenuComponent.js';
 import ProductItem from './ProductItemComponent.js';
+import ShoppingBag from '../ShoppingBag/index.js';
 import DesktopSidebar from '../_components/DesktopSidebar.js';
 import styled from 'styled-components';
 import { device, adjust } from '../_components/MediaQueries.js';
@@ -117,6 +118,7 @@ const BrowseComponent = () => {
                   <h3 style={{backgroundColor: '#282828', display: 'inline-block', padding: '16px 18px', borderRadius: '20px', fontWeight: 'light'}}>End</h3>
               </div> */}
           </BrowseContainer>
+          <ShoppingBag mode={'fixed'} />
         </StyledSection>
         }
       </React.Fragment>
