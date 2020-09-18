@@ -1,89 +1,117 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { API } from 'aws-amplify';
+import { byDesignation, byIdentityOrientation, listProducts } from '../graphql/queries.js';
 import styled from 'styled-components';
+import HeaderMenu from '../_components/HeaderMenuComponent.js';
+import { Section, Container, animate } from '../_components/styles.js';
+import collage from '../img/collage1.png';
+import ItemRow from './ItemRow.js';
+import ShoppingBag from '../ShoppingBag/index.js';
 
-// const IntroSection = styled.div`
-//     padding-top: 75px;
-//     height: 80vh;
-//     position: relative;
-//     text-align: center;
-//     h3 {
-//         font-family: 'Poppins', sans-serif;
-//         letter-spacing: .5px;
-//         position: absolute;
-//         display: inline-block;
-//         top: 50%;
-//         transform: translateY(-50%);
-//         color: white;
-//     }
-// `;
-
-const H3 = styled.h3`
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: .5px;
-    position: absolute;
-    display: inline;
-    top: 25%;
-    transform: translateY(-50%);
-    color: white;
+const SectionNoMargin = styled(Section)`
+-webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+margin: 0px;
 `;
 
-const Menu = styled.div`
+const Top = styled.div`
+ -webkit-animation: ${animate.fadeIn} 230ms linear;
+  animation: ${animate.fadeIn} 230ms linear;
+  height: 60vh;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding-top: 10px;
-  background-color: #151515;
-  position: fixed;
-  opacity: 0.9;
+  background-image: url(${collage});
+  background-position: bottom -100px center;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+  div {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Baloo Tamma 2', sans-serif;
+  }
 `;
 
-const MenuWrapper = styled.div`
-  height: 100%;
-`;
-
-const ColLeft = styled.div`
-  display: inline-block;
-`;
-
-const ColRight = styled.div`
-  display: inline-block;
-  padding-top: 18px;
-`;
-
-const StyledLink = styled(Link)`
-  color: white;
-  ${'' /* text-transform: uppercase; */}
-  font-weight: 800;
-  text-decoration: none;
-  margin-top: 50px;
-`;
-
-const Logo = styled.h1`
-  font-family: 'Poppins', sans-serif;
-  font-weight: 800;
-  font-size: 20px;
-  text-transform: uppercase;
-  color: white;
+const Container100 = styled(Container)`
+  width: 100%;
 `;
 
 const ForYouComponent = () => {
+  const [trending, setTrending] = useState([]);
+  const [deals, setDeals] = useState([]);
+
+  const getTrending = async () => {
+    if(localStorage.productRequestCount && localStorage.productRequestCount < 10500) {
+      setTrending(JSON.parse(localStorage.byIdentityOrientation))
+      localStorage.productRequestCount++;
+      console.log("Set Products from Local Storage - Product Request Count is: " + localStorage.productRequestCount)
+    }
+    else {
+      try {
+        const productData = await API.graphql({
+          query: byIdentityOrientation,
+          variables: { identityOrientation: 'Unisex', limit: 6 }
+        })
+        setTrending(productData.data.byIdentityOrientation.items)
+        localStorage.byIdentityOrientation = JSON.stringify(productData.data.byIdentityOrientation.items)
+        localStorage.productRequestCount = 1;
+      }
+      catch(err) {
+        console.log(err)
+      }
+    }
+  }
+
+  const getDeals = async () => {
+    if(localStorage.productRequestCount && localStorage.productRequestCount < 10500) {
+      setDeals(JSON.parse(localStorage.byDesignation))
+      localStorage.productRequestCount++;
+      console.log("Set Products from Local Storage - Product Request Count is: " + localStorage.productRequestCount)
+    }
+    else {
+      try {
+        const productData = await API.graphql({
+          query: byDesignation,
+          variables: { designation: 'Black-owned', limit: 6 }
+        })
+        console.log(productData)
+        setDeals(productData.data.byDesignation.items)
+        localStorage.byDesignation = JSON.stringify(productData.data.byDesignation.items)
+        localStorage.productRequestCount = 1;
+      }
+      catch(err) {
+        console.log(err)
+      }
+    }
+  }
+
+  useEffect(() => {
+    getTrending()
+    getDeals()
+  }, [])
     return (
-        <div className="container">
-        <MenuWrapper>
-            <Menu>
-              <ColLeft>
-                <Logo>Authentic.shop</Logo>
-              </ColLeft>
-              <ColRight>
-                <StyledLink to="/">Menu</StyledLink>
-              </ColRight>
-            </Menu>
-          </MenuWrapper>
-        <div style={{border: '2px solid red'}}>
-            <H3>*Curated For You</H3>
-        </div>
-        </div>
+        <React.Fragment>
+          <HeaderMenu link="/" linktext="Menu" columnmenu={true}/>
+          <SectionNoMargin>
+            <Top>
+            <div>
+              <h1>For you</h1>
+            </div>
+            </Top>
+          </SectionNoMargin>
+          <Section>
+            <Container100>
+              <ItemRow title="Trending on Authentic.shop" items={trending} />
+              <ItemRow title="This Week's Deals" items={trending} />
+              {/* <ItemRow title="This week's deals" items={deals} /> */}
+            </Container100>
+          <ShoppingBag mode={'fixed'} />
+          </Section>
+        </React.Fragment>
     );
 }
 

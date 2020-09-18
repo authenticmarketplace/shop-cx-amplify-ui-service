@@ -7,6 +7,7 @@ import ScrollToTop from './_components/ScrollToTop.js';
 import AppMenu from './Menu';
 import ForYouComponent from './ForYouComponent.js';
 import MyStoreComponent from './MyStoreComponent';
+import ShoppingBagComponent from './ShoppingBag/BagComponent.js';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/browse" component={BrowseComponent} />
           <Route path="/foryou" component={ForYouComponent} />
           <Route path="/mystore" component={MyStoreComponent} />
+          <Route path="/bag" component={ShoppingBagComponent} />
           <Route path="/product/:productID" component={ProductInfoComponent} id=":productID" />
         </Switch>
       </Router>

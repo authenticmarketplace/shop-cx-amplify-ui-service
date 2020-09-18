@@ -2,7 +2,8 @@ import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { useTransition, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 import { API } from 'aws-amplify';
-import { byIdentityOrientation, getProduct } from '../graphql/queries.js';
+import { useShoppingCart } from 'use-shopping-cart';
+import { byIdentityOrientation, getProduct, listBrands } from '../graphql/queries.js';
 import styled from 'styled-components';
 import { img } from '../img/index.js';
 import { device } from '../_components/MediaQueries.js';
@@ -122,6 +123,8 @@ const ProductContent = styled.div`
       padding: 5px 0px;
       border-radius: 80px;
       width: auto;
+      outline: none;
+      cursor: pointer;
     }
     @media ${device.tablet} {
       border-bottom-left-radius: 0px;
@@ -208,6 +211,10 @@ const MoreProducts = styled.div`
   }
 `;
 
+const MoreByBrand = styled.div`
+  color: white;
+`;
+
 const initialState = {
   item: {},
   isLoading: true,
@@ -228,6 +235,8 @@ const reducer = (state, action) => {
 const ProductInfoComponent = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [more_products, setMoreProducts] = useState([]);
+  const [moreByBrand, setMoreByBrand] = useState([]);
+  const { addItem } = useShoppingCart()
 
   const [sliderIndex, setSliderIndex] = useState(0)
   const onSliderClick = useCallback(() => setSliderIndex(n => (n + 1) % state.item.images.length), [state.item])
@@ -265,6 +274,31 @@ const ProductInfoComponent = (props) => {
     }
   }
 
+  const requestProductsByBrand = async () => {
+    try {
+      const productData = await API.graphql({
+        query: listBrands,
+        variables: { brandID: state.item.brand.brandID, limit: 4 }
+      })
+      console.log(productData.data.listBrands.items[0].products.items)
+      setMoreByBrand(productData.data.listBrands.items[0].products.items);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  const addProductToBag = () => {
+    const product = { name: state.item.name,
+      description: state.item.brand.displayName,
+      sku: state.item.productID,
+      price: state.item.price,
+      currency: 'USD',
+      image: state.item.images[0],
+    }
+    addItem(product)
+  }
+
   useEffect(() => {
     if(props.location.state === undefined) {
       requestProduct(props.match.params.productID)
@@ -277,6 +311,7 @@ const ProductInfoComponent = (props) => {
   useEffect(() => {
     if(!state.isLoading) {
       requestMoreProducts()
+      requestProductsByBrand()
     }
   }, [state.isLoading])
 
@@ -303,7 +338,7 @@ const ProductInfoComponent = (props) => {
                   <h2>${state.item.price}</h2>
                   <h3>{state.item.name}</h3>
                   <p>{state.item.productCaption}</p>
-                  <button><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
+                  <button onClick={addProductToBag}><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
                 </ProductContent>
               </ProductContentWrapper>
             </ProductRow>
@@ -312,14 +347,36 @@ const ProductInfoComponent = (props) => {
         </StyledSection>
         <StyledSection2>
           <ProductContainer>
-            <MoreDetailsWrapper>                   
+            <MoreDetailsWrapper>
+            <div>             
               <BrandDetails>
               {/* <span style={{cursor: 'pointer',fontSize: '12px', fontWeight: '500', borderRadius: '16px', border: '1px solid white', padding: '0px 5px'}}>+</span> */}
                 <h3>{state.item.brand.displayName}</h3>
                 <h3><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {state.item.brand.designation}</h3>
                 <h3><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {state.item.brand.locale}</h3>
                 <p>{state.item.brand.bio}</p>
-              </BrandDetails>                    
+              </BrandDetails>
+              {/* <MoreProducts>
+                  <h4>Other products from {state.item.brand.brandID}</h4>
+                  {moreByBrand.map((product) => {
+                  return (
+                    <React.Fragment key={product.productID}>
+                    <Link to={{
+                      pathname: `/product/${product.productID}`,
+                      state: {
+                          item: product
+                          }
+                      }} onClick={() => dispatch({ type: 'SET_ITEM', item: product })} style={{textDecoration: 'none'}} key={product.productID}>
+                      <div style={{display: 'flex', flexDirection: 'column', }}>
+                        <img src={product.images[0]} alt={product.name} />
+                        <p style={{textDecoration: 'none'}}>{product.name} <br/> <span style={{fontWeight: '600'}}>{product.brand.displayName}</span></p>
+                      </div>
+                    </Link>
+                    </React.Fragment>
+                  )
+                })}
+              </MoreProducts>                */}
+            </div>      
               <MoreProducts>
                 <h4>More Like This</h4>
                 {more_products.map((product) => {

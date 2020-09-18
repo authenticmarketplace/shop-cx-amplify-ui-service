@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useShoppingCart } from 'use-shopping-cart'
 import { device, adjust } from '../_components/MediaQueries.js';
 import { animate } from '../_components/styles.js';
 
@@ -69,7 +71,7 @@ const styles = {
         marginTop: '0px',
         innerView: {
             width: '100%',
-            opacity: '.7',
+            opacity: '.4',
             transition: '.2s',
             margin: '0px',
             borderRadius: '17px 17px 0px 0px',
@@ -100,19 +102,22 @@ const styles = {
 
 const ShoppingBag = (props) => {
     const mode = props.mode && props.mode === 'fixed' ? styles.fixed : styles.static;
-    console.log(mode.innerView.margin)
+    const { cartCount } = useShoppingCart()
+
     return (
         <Wrapper mode={mode}>
-            <InnerView mode={mode}>
-                <LeftDiv>
-                    <h4>Bag</h4>
-                    <h4>(3)</h4>
-                </LeftDiv>
-                <RightDiv>
-                    <h4>Place Order</h4>
-                    <h4>&#62;</h4>
-                </RightDiv>
-            </InnerView>
+            <Link to="/bag">
+                <InnerView mode={mode}>
+                    <LeftDiv>
+                        <h4>Bag</h4>
+                        <h4>({cartCount})</h4>
+                    </LeftDiv>
+                    <RightDiv>
+                        <h4>Review Order</h4>
+                        <h4>&#62;</h4>
+                    </RightDiv>
+                </InnerView>
+            </Link>
         </Wrapper>
     )
 }

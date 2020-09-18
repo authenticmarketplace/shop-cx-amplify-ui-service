@@ -9,6 +9,7 @@ import DesktopSidebar from '../_components/DesktopSidebar.js';
 import styled from 'styled-components';
 import { device, adjust } from '../_components/MediaQueries.js';
 import { Section, Container, animate } from '../_components/styles.js';
+import collage from '../img/collage1.png';
 
 const StyledSection = styled(Section)`
   padding-top: 80px;
@@ -16,7 +17,7 @@ const StyledSection = styled(Section)`
   animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
   @media ${device.tablet} {
     margin-left: 20%;
-    padding-top: 100px;
+    padding-top: 40px;
   }
 `;
 
@@ -41,6 +42,34 @@ const ProductRow = styled.div`
   }
 `;
 
+const SectionNoMargin = styled(Section)`
+-webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+margin: 0px;
+`;
+
+const Top = styled.div`
+ -webkit-animation: ${animate.fadeIn} 230ms linear;
+  animation: ${animate.fadeIn} 230ms linear;
+  height: 60vh;
+  width: 100%;
+  background-image: url(${collage});
+  background-position: bottom -100px right;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+  div {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Baloo Tamma 2', sans-serif;
+  }
+`;
+
 const initialState = {
   products: [],
   error: false,
@@ -62,7 +91,7 @@ const BrowseComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const request_products = async () => {
-    if(localStorage.productRequestCount && localStorage.productRequestCount < 100) {
+    if(localStorage.productRequestCount && localStorage.productRequestCount < 10500) {
       dispatch({type: 'SET_PRODUCTS', products: JSON.parse(localStorage.allProducts)})
       localStorage.productRequestCount++;
       console.log("Set Products from Local Storage - Product Request Count is: " + localStorage.productRequestCount)
@@ -94,6 +123,13 @@ const BrowseComponent = () => {
       <React.Fragment>
         <DesktopSidebar hotitems={state.products}/>
         <HeaderMenu link="/" linktext="Menu"/>
+        <SectionNoMargin>
+            <Top>
+            <div>
+              <h1>Browse Feed</h1>
+            </div>
+            </Top>
+          </SectionNoMargin>
         {state.isLoading ? <h1>Loading...</h1> : 
         <StyledSection>
           <BrowseContainer>

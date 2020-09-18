@@ -13,7 +13,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-spring": "^8.0.27",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "use-shopping-cart": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
