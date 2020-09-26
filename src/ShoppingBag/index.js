@@ -16,6 +16,9 @@ const Wrapper = styled.div`
     left: 0;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
+    @media ${device.tablet} {
+        display: ${props => props.mode.display}
+    }
    
 `;
 
@@ -67,15 +70,17 @@ const RightDiv = styled(LeftDiv)`
 
 const styles = {
     fixed: {
+        display: 'none',
         position: 'fixed',
         marginTop: '0px',
         innerView: {
-            width: '100%',
-            opacity: '.4',
+            width: '95%',
+            opacity: '1',
             transition: '.2s',
-            margin: '0px',
-            borderRadius: '17px 17px 0px 0px',
+            margin: '6px',
+            borderRadius: '17px',
             tablet: {
+                display: 'none',
                 width: '59%',
                 margin: '0px 0px 20px 16%',
                 borderRadius: '17px'

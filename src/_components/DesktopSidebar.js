@@ -34,7 +34,11 @@ const SideBarPanel = styled.div`
 const HotItemSection = styled.div`
     margin-top: 40px;
     @media ${device.laptopL} {
-        margin-top: 75px;
+        margin-top: 40px;
+        margin-bottom: 60px;
+    }
+    h4 {
+        margin-top: 0px;
     }
 `;
 
@@ -54,10 +58,11 @@ const HotItem = styled.img`
 
 const SideBarButtonsSection = styled.div`
     width: 100%;
-    margin-top: 35px;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 25px 0px;
 `;
 
-const SidebarButton = styled.a`
+const SidebarButton = styled(Link)`
     display: block;
     color: #505050;
     font-family: 'Lato', sans-serif;
@@ -65,6 +70,7 @@ const SidebarButton = styled.a`
     font-weight: 700;
     font-size: 14px;
     transition: 0.2s;
+    text-decoration: none;
     
     :hover {
         background-color: #404040;
@@ -90,16 +96,30 @@ const Img = styled.img`
 `;
 
 const DesktopSidebar = (props) => {
-    const [hotitems, setHotItems] = useState([]);
+    // const [hotitems, setHotItems] = useState([]);
 
-    useEffect(() => {
-        setHotItems(props.hotitems.slice(9, 12))
-    }, [props])
+    // useEffect(() => {
+    //     setHotItems(props.hotitems.slice(9, 12))
+    // }, [props])
 
     return (
         <SideBarPanel>
             <StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo>
-            <HotItemSection>
+            <div style={{marginTop: '10px'}}>
+            <SideBarButtonsSection>
+                <h4 style={{fontSize: '13px'}}>Explore</h4>
+                <SidebarButton to="/browse">Browse</SidebarButton>
+                <SidebarButton to="/foryou">For You</SidebarButton>
+                <SidebarButton to="/mystore">My Store</SidebarButton>
+            </SideBarButtonsSection>
+            </div>
+            <SideBarButtonsSection>
+                <h4 style={{fontSize: '13px'}}>More</h4>
+                <SidebarButton>New Releases</SidebarButton>
+                <SidebarButton>Recently Viewed</SidebarButton>
+                <SidebarButton>Favorite Brands</SidebarButton>
+            </SideBarButtonsSection>
+            {/* <HotItemSection>
             <h4>VIP</h4>
             {hotitems.length > 0 ? 
                 <React.Fragment>
@@ -120,12 +140,10 @@ const DesktopSidebar = (props) => {
                 </React.Fragment> :
                 <React.Fragment />
             }
-            </HotItemSection>
-            <SideBarButtonsSection>
-                <SidebarButton>New Releases</SidebarButton>
-                <SidebarButton>Recently Viewed</SidebarButton>
-                <SidebarButton>Favorite Brands</SidebarButton>
-            </SideBarButtonsSection>
+            </HotItemSection> */}
+            {/* <div style={{backgroundColor: '#282828'}}>
+            <h3 style={{margin: '0px', padding: '30px 0px', color: '#383838', fontWeight: '300'}}>Help</h3>
+            </div> */}
         </SideBarPanel>
     )
 }

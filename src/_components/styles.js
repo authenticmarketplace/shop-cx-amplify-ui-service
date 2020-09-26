@@ -56,7 +56,7 @@ export const MenuWrapper = styled.div`
 export const Menu = styled.div`
   width: 100%;
   padding-top: 0px;
-  background-color: #151515;
+  background-color: rgb(0,0,0, 0,0);
   position: fixed;
   padding-bottom: 10px;
   text-align: right;

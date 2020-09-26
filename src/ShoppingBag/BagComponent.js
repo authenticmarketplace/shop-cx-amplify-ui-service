@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useShoppingCart } from 'use-shopping-cart';
 import styled from 'styled-components';
-import HeaderMenu from '../_components/HeaderMenuComponent.js';
+import HeaderMenu from '../HeaderMenu/index.js';
 import BagItems from './BagItems.js';
 import { Section, Container } from '../_components/styles.js';
 import { device } from '../_components/MediaQueries.js';
@@ -35,6 +35,17 @@ const HeadingDiv = styled.div`
             color: grey;
         }
     }
+  @media ${device.mobileS} {
+    div {
+        h1 {
+            font-size: 20px;
+        }
+        h3 {
+            color: grey;
+            font-size: 15px;
+        }
+    }
+  }
 `;
 
 const ProductSection = styled(Section)``;

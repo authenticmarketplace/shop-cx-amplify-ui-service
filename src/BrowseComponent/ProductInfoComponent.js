@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { useTransition, animated } from 'react-spring';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { API } from 'aws-amplify';
 import { useShoppingCart } from 'use-shopping-cart';
 import { byIdentityOrientation, getProduct, listBrands } from '../graphql/queries.js';
@@ -8,14 +8,18 @@ import styled from 'styled-components';
 import { img } from '../img/index.js';
 import { device } from '../_components/MediaQueries.js';
 import { Section, Container } from '../_components/styles.js';
-import HeaderMenu from '../_components/HeaderMenuComponent.js';
+import HeaderMenu from '../HeaderMenu/index.js';
 import ShoppingBag from '../ShoppingBag/index.js';
+import DesktopSidebar from '../_components/DesktopSidebar.js';
+import NavButtons from '../_components/NavButtons.js';
 
 const StyledSection = styled(Section)`
   padding-top: 90px;
   margin: 0px;
   @media ${device.tablet} {
-    padding-top: 115px;
+    padding-top: 95px;
+    margin-left: 20%;
+  }
   }
 `;
 
@@ -31,6 +35,9 @@ const ProductContainer = styled(Container)`
 const StyledSection2 = styled(Section)`
 padding-top: 0px;
 margin: 0px;
+@media ${device.tablet} {
+    margin-left: 20%;
+  }
 `;
 
 const ImgWrapper = styled(animated.div)`
@@ -237,6 +244,7 @@ const ProductInfoComponent = (props) => {
   const [more_products, setMoreProducts] = useState([]);
   const [moreByBrand, setMoreByBrand] = useState([]);
   const { addItem } = useShoppingCart()
+  const history = useHistory()
 
   const [sliderIndex, setSliderIndex] = useState(0)
   const onSliderClick = useCallback(() => setSliderIndex(n => (n + 1) % state.item.images.length), [state.item])
@@ -317,11 +325,14 @@ const ProductInfoComponent = (props) => {
 
   return (   
       <div style={{fontFamily: 'Poppins, sans-serif'}}>
-      <HeaderMenu link="/browse" linktext="Browse" columnmenu={true}/>
+      <HeaderMenu link="/browse" linktext="Browse" />
+      <DesktopSidebar />
       {state.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 
         <StyledSection>
           <Container>
+          <div style={{textAlign: 'left', marginBottom: '10px'}}>
+          </div>
             <ProductRow>
             {transitions.map(({ item, props, key }) => {
               return (
@@ -356,7 +367,7 @@ const ProductInfoComponent = (props) => {
                 <h3><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {state.item.brand.locale}</h3>
                 <p>{state.item.brand.bio}</p>
               </BrandDetails>
-              {/* <MoreProducts>
+              <MoreProducts>
                   <h4>Other products from {state.item.brand.brandID}</h4>
                   {moreByBrand.map((product) => {
                   return (
@@ -375,7 +386,7 @@ const ProductInfoComponent = (props) => {
                     </React.Fragment>
                   )
                 })}
-              </MoreProducts>                */}
+              </MoreProducts>               
             </div>      
               <MoreProducts>
                 <h4>More Like This</h4>
@@ -407,3 +418,7 @@ const ProductInfoComponent = (props) => {
 }
 
 export default ProductInfoComponent;
+
+          {/* <h4 style={{display: 'block', width: '100%', margin: '0px', padding: '0px', textAlign: 'left', color: 'grey', fontWeight: '400'}}>{state.item.category}</h4>
+          <h3 style={{display: 'block', width: '100%', margin: '0px 0px', padding: '0px', textAlign: 'left', color: 'white'}}>{state.item.name}</h3>
+          <h4 style={{display: 'block', width: '100%', margin: '0px 0px 15px 0px', padding: '0px', textAlign: 'left', color: 'white', fontWeight: '400'}}>{state.item.productCaption}</h4> */}

@@ -2,14 +2,14 @@ import React, { useReducer, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API } from 'aws-amplify';
 import { listProducts } from '../graphql/queries.js';
-import HeaderMenu from '../_components/HeaderMenuComponent.js';
+import HeaderMenu from '../HeaderMenu/index.js';
 import ProductItem from './ProductItemComponent.js';
 import ShoppingBag from '../ShoppingBag/index.js';
 import DesktopSidebar from '../_components/DesktopSidebar.js';
 import styled from 'styled-components';
 import { device, adjust } from '../_components/MediaQueries.js';
 import { Section, Container, animate } from '../_components/styles.js';
-import collage from '../img/collage1.png';
+import { tempImg } from '../img/index.js';
 
 const StyledSection = styled(Section)`
   padding-top: 80px;
@@ -42,31 +42,37 @@ const ProductRow = styled.div`
   }
 `;
 
-const SectionNoMargin = styled(Section)`
+const SectionNoMargin = styled(StyledSection)`
 -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
   animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
-margin: 0px;
 `;
 
 const Top = styled.div`
  -webkit-animation: ${animate.fadeIn} 230ms linear;
   animation: ${animate.fadeIn} 230ms linear;
-  height: 60vh;
+  height: 40vh;
   width: 100%;
-  background-image: url(${collage});
+  background-image: url(${tempImg.collage});
   background-position: bottom -100px right;
-  border-bottom-left-radius: 17px;
-  border-bottom-right-radius: 17px;
+  border-radius: 17px;
+  margin-top: 40px;
   div {
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: white;
-    font-family: 'Baloo Tamma 2', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  @media ${device.tablet} {
+    div {
+      left: 57.5%;
+    }
   }
 `;
 
@@ -126,7 +132,7 @@ const BrowseComponent = () => {
         <SectionNoMargin>
             <Top>
             <div>
-              <h1>Browse Feed</h1>
+              <h1>Browse</h1>
             </div>
             </Top>
           </SectionNoMargin>

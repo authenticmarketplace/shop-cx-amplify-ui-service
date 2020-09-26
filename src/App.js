@@ -8,6 +8,7 @@ import AppMenu from './Menu';
 import ForYouComponent from './ForYouComponent.js';
 import MyStoreComponent from './MyStoreComponent';
 import ShoppingBagComponent from './ShoppingBag/BagComponent.js';
+import Playground from './playground.js';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Router>
         <ScrollToTop/>
         <Switch>
-          <Route path="/" exact component={AppMenu} />
+          <Route path="/" exact component={Playground} />
           <Route path="/browse" component={BrowseComponent} />
           <Route path="/foryou" component={ForYouComponent} />
           <Route path="/mystore" component={MyStoreComponent} />

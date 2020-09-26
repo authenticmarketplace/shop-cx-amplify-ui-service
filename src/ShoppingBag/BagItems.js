@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useShoppingCart } from 'use-shopping-cart';
+import { device } from '../_components/MediaQueries.js';
 
 const ProductItem = styled.div`
     font-family: 'Lato', sans-serif;
@@ -28,6 +29,24 @@ const ProductItem = styled.div`
             margin-bottom: 12px;
             cursor: pointer;
         }
+        img {
+            height: 150px;
+            border-radius: 17px;
+            display: block;
+        }
+    }
+    @media ${device.mobileS} {
+        width: 100%;
+        div {
+            img {
+                height: 100px;
+            }
+            h3 {
+            text-align: left;
+            margin-top: 0px;
+            font-size: 12px;
+            }
+        }
     }
 `;
 
@@ -41,7 +60,7 @@ const BagItem = ({ itemList }) => {
             return (
             <ProductItem>
                 <div>
-                    <img src={item.image} style={{height: '150px', borderRadius: '17px', display: 'block'}}/>
+                    <img src={item.image} />
                     <button onClick={() => removeItem(item.sku)}>Remove</button>
                 </div>
                 <div>
