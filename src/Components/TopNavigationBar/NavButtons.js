@@ -18,6 +18,7 @@ const Wrapper = styled.div`
             transition: .2s;
             padding: 7px 12px;
             border-radius: 18px;
+            outline: none;
             :hover {
                 background-color: grey;
             }

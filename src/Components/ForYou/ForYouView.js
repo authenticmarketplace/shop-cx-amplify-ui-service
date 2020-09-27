@@ -10,6 +10,7 @@ import TopNavigationBar from '../TopNavigationBar/index.js';
 import ItemRow from './ItemRow.js';
 import ShoppingBag from '../ShoppingBag/ShoppingBagBar.js';
 import DesktopSidebar from '../DesktopSidebar/';
+import BottomNavigationBar from '../BottomNavigationBar/index.js';
 
 const ImgWrapper = styled(Section)`
   -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -71,6 +72,7 @@ const ForYouView = (props) => {
         <React.Fragment>
             <DesktopSidebar />
             <TopNavigationBar />
+            <BottomNavigationBar />
             <ImgWrapper>
                 <Top>
                 <div />
@@ -82,7 +84,6 @@ const ForYouView = (props) => {
                   <ItemRow title="This Week's Deals" items={props.trending} />
                   {/* <ItemRow title="This week's deals" items={deals} /> */}
                 </Container100>
-            <ShoppingBag mode={'fixed'} />
             </StyledSection>
         </React.Fragment>
     )

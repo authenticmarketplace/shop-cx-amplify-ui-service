@@ -10,9 +10,20 @@ import { tempImg } from '../../img/index.js';
 import TopNavigationBar from '../TopNavigationBar';
 import ProductDetailCard from '../ProductDetails/ProductDetailCard';
 import DesktopSidebar from '../DesktopSidebar';
+import BottomNavigationBar from '../BottomNavigationBar/index.js';
 
 const StyledSection = styled(Section)`
-padding-top: 80px;
+padding-top: 65px;
+-webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+@media ${device.tablet} {
+  margin-left: 20%;
+  padding-top: 40px;
+}
+`;
+
+const ProductSection = styled(Section)`
+padding-top: 25px;
 -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
 animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
 @media ${device.tablet} {
@@ -47,13 +58,13 @@ const Top = styled.div`
 animation: ${animate.fadeIn} 230ms linear;
 height: 40vh;
 width: 100%;
-background-image: url(${tempImg.collage});
+background-image: url(${tempImg.idk3});
 background-position: bottom -100px right;
+background-size: cover;
 border-radius: 17px;
-margin-top: 40px;
 div {
   position: absolute;
-  top: 35%;
+  top: 30%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -65,6 +76,7 @@ div {
   font-size: 12px;
 }
 @media ${device.tablet} {
+  margin-top: 40px;
   div {
     left: 57.5%;
   }
@@ -77,6 +89,7 @@ const BrowsePage = (props) => {
         <React.Fragment>
             <DesktopSidebar />
             <TopNavigationBar />
+            <BottomNavigationBar />
             <StyledSection>
                 <Top>
                     <div>
@@ -85,7 +98,7 @@ const BrowsePage = (props) => {
                 </Top>
             </StyledSection>
             {props.isLoading ? <h1>Loading...</h1> : 
-            <StyledSection>
+            <ProductSection>
                 <BrowseContainer>
                     <ProductRow>
                     {props.products ? props.products.map((item) => {
@@ -105,7 +118,7 @@ const BrowsePage = (props) => {
                     }) : props.request_products()}
                     </ProductRow>
                 </BrowseContainer>
-            </StyledSection>
+            </ProductSection>
             }
         </React.Fragment>
     )

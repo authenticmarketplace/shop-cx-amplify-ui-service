@@ -31,10 +31,11 @@ const ProductWrapper = styled.div`
 `;
 
 const ProductImgWrapper = styled.div`
-    display: inline-block;
+    display: block;
 `;
 
 const ProductImg = styled.img`
+    display: block;
     height: auto;
     width: 100%;
     margin: 0px;
@@ -44,7 +45,7 @@ const ProductImg = styled.img`
 `;
 
 const ProductContentWrapper = styled.div`
-    margin-top: -3px;
+    ${'' /* margin-top: -3px; */}
     background-color: #202020;
     padding: 10px 30px 50px 30px;
     text-align: left;

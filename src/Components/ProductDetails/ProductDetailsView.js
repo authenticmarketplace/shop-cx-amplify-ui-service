@@ -9,11 +9,12 @@ import { device } from '../_parts/MediaQueries.js';
 import { Section, Container } from '../_parts/styles.js';
 /* App Components */
 import TopNavigationBar from '../TopNavigationBar';
+import BottomNavigationBar from '../BottomNavigationBar';
 import ShoppingBag from '../ShoppingBag/ShoppingBagBar';
 import DesktopSidebar from '../DesktopSidebar';
 
 const StyledSection = styled(Section)`
-  padding-top: 90px;
+  padding-top: 60px;
   margin: 0px;
   @media ${device.tablet} {
     padding-top: 95px;
@@ -130,6 +131,9 @@ const ProductContent = styled.div`
       width: auto;
       outline: none;
       cursor: pointer;
+      :active {
+        transform: scale(0.98); 
+      }
     }
     @media ${device.tablet} {
       border-bottom-left-radius: 0px;
@@ -224,6 +228,7 @@ const ProductDetailsView = (props) => {
   return (
     <div style={{fontFamily: 'Poppins, sans-serif'}}>
       <TopNavigationBar />
+      {/* <BottomNavigationBar /> */}
       <DesktopSidebar />
       {props.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 

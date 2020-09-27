@@ -7,11 +7,17 @@ import { Menu, Logo, animate } from '../_parts/styles.js';
 import { device } from '../_parts/MediaQueries.js';
 import { img } from '../../img/index.js';
 /* App Components */
+import OptionsTab from './OptionsTab.js';
+
+const StyledLogo = styled(Logo)`
+  font-size: 13px;
+`;
 
 const MobileMenu = styled(Menu)`
+  background-color: #1e1e1e;
   z-index: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
     @media ${device.tablet} {
         display: none;
     }
@@ -21,7 +27,7 @@ const ColLeft = styled.div`
   display: flex;
   align-items: flex-start;
   margin-top: 16px;
-  padding: 0 12px;
+  padding: 0px;
   h1 {
     margin-top: 0px;
   }
@@ -39,26 +45,16 @@ const ColRight = styled.div`
   align-self: center;
 `;
 
-const StyledLinkMobile = styled(Link)`
-  color: white;
-  font-weight: 800;
-  text-decoration: none;
-  display: inline-block;
-  padding-top: 5px;
-  -webkit-animation: ${animate.fadeIn} 230ms linear;
-  animation: ${animate.fadeIn} 230ms linear;
-`;
-
 const MobileMenuComponent = (props) => {
     return (
     <React.Fragment>
         <MobileMenu>
             <ColLeft>
                 <img src={img.circlelogo} alt="logo"/>
-                <Link to="/"><Logo>Authentic.shop</Logo></Link>
+                <Link to="/"><StyledLogo>Authentic.shop</StyledLogo></Link>
             </ColLeft>
             <ColRight>
-                <StyledLinkMobile to="/bag" style={{fontWeight: '300'}}>Dylan</StyledLinkMobile>
+                <OptionsTab />
             </ColRight>
         </MobileMenu>
     </React.Fragment>

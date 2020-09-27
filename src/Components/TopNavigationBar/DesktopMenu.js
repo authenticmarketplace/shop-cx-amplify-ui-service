@@ -8,6 +8,7 @@ import { device } from '../_parts/MediaQueries.js';
 import { img } from '../../img/index.js';
 /* App Components */
 import NavButtons from './NavButtons.js';
+import OptionsTab from './OptionsTab.js';
 
 const LogoDiv = styled.div`
   display: ${props => props.displaylogo};
@@ -33,17 +34,7 @@ const DesktopMenu = styled(Menu)`
   }
 `;
 
-const StyledLinkDesktop = styled(Link)`
-  color: white;
-  font-weight: 800;
-  text-decoration: none;
-  display: inline-block;
-  margin-right: 50px;
-  ${'' /* -webkit-animation: ${animate.fadeIn} 230ms linear;
-  animation: ${animate.fadeIn} 230ms linear; */}
-  background-color: #1e1e1e;
-  border-radius: 12px;
-`;
+
 
 const DesktopMenuComponent = (props) => {
     return (
@@ -55,11 +46,7 @@ const DesktopMenuComponent = (props) => {
           </LogoDiv> */}
           <div style={{marginTop: '20px'}}>
             <NavButtons />
-            <StyledLinkDesktop to="/bag" style={{fontWeight: '300', padding: '10px 13px'}}>
-                <img style={{width: '17px'}} src={img.bag2}/>
-                <span style={{fontSize: '12px', borderRadius: '20px', backgroundColor: '#2E8B57', padding: '2px 7px'}}>{props.cartCount}</span>
-                <span style={{marginLeft: '7px', paddingLeft: '7px', borderLeft: '1px solid white'}}>Dylan</span>
-            </StyledLinkDesktop>
+            <OptionsTab />
           </div>
         </DesktopMenu>
     </React.Fragment>
