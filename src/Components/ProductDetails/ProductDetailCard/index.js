@@ -1,8 +1,10 @@
+/* NPM Modules */
 import React from 'react';
 import styled from 'styled-components';
-import { device } from '../_components/MediaQueries.js';
+/* App Modules */
+import { device } from '../../_parts/MediaQueries.js';
+/* App Components */
 
-/* Product WRAPPER */
 const ProductWrapper = styled.div`
     display: inline-block;
     border-radius: 17px;
@@ -27,11 +29,11 @@ const ProductWrapper = styled.div`
         width: 255px;
     }
 `;
-/* Product IMG WRAPPER */
+
 const ProductImgWrapper = styled.div`
     display: inline-block;
 `;
-/* Product IMG */
+
 const ProductImg = styled.img`
     height: auto;
     width: 100%;
@@ -40,7 +42,7 @@ const ProductImg = styled.img`
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 `;
-/* Product CONTENT WRAPPER */
+
 const ProductContentWrapper = styled.div`
     margin-top: -3px;
     background-color: #202020;
@@ -79,7 +81,7 @@ const ProductContentWrapper = styled.div`
     }
 `;
 
-const ProductItemComponent = (props) => {
+const ProductDetailCard = (props) => {
     return (
         <ProductWrapper>
             <ProductImgWrapper>
@@ -100,4 +102,4 @@ const ProductItemComponent = (props) => {
     );
 }
 
-export default ProductItemComponent;
+export default ProductDetailCard;

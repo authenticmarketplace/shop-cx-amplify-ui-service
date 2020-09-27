@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { device } from '../_components/MediaQueries.js';
+/* NPM Modules */
+import React from 'react';
 import { Link } from 'react-router-dom'
-import { img } from '../img/index.js';
-import { Logo } from './styles.js';
+import styled from 'styled-components';
+/* App Modules */
+import { device } from '../_parts/MediaQueries.js';
+import { img } from '../../img/index.js';
+import { Logo } from '../_parts/styles.js';
+/* App Components */
 
 const SideBarPanel = styled.div`
     overflow-y: scroll;
@@ -28,31 +31,6 @@ const SideBarPanel = styled.div`
     }
     @media ${device.tablet} {
         display: block;
-    }
-`;
-
-const HotItemSection = styled.div`
-    margin-top: 40px;
-    @media ${device.laptopL} {
-        margin-top: 40px;
-        margin-bottom: 60px;
-    }
-    h4 {
-        margin-top: 0px;
-    }
-`;
-
-const HotItem = styled.img`
-    height: 60px;
-    border-radius: 70px;
-    margin: 5px 0px;
-    opacity: 1.0;
-    background-color: white;
-    padding: 10px;
-    transition: 0.3s;
-    :hover {
-        opacity: 1.0;
-        cursor: pointer;
     }
 `;
 
@@ -95,20 +73,14 @@ const Img = styled.img`
     height: 75px;
 `;
 
-const DesktopSidebar = (props) => {
-    // const [hotitems, setHotItems] = useState([]);
-
-    // useEffect(() => {
-    //     setHotItems(props.hotitems.slice(9, 12))
-    // }, [props])
-
+const DesktopSidebarView = (props) => {
     return (
         <SideBarPanel>
             <StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo>
             <div style={{marginTop: '10px'}}>
             <SideBarButtonsSection>
                 <h4 style={{fontSize: '13px'}}>Explore</h4>
-                <SidebarButton to="/browse">Browse</SidebarButton>
+                <SidebarButton to="/">Browse</SidebarButton>
                 <SidebarButton to="/foryou">For You</SidebarButton>
                 <SidebarButton to="/mystore">My Store</SidebarButton>
             </SideBarButtonsSection>
@@ -119,28 +91,7 @@ const DesktopSidebar = (props) => {
                 <SidebarButton>Recently Viewed</SidebarButton>
                 <SidebarButton>Favorite Brands</SidebarButton>
             </SideBarButtonsSection>
-            {/* <HotItemSection>
-            <h4>VIP</h4>
-            {hotitems.length > 0 ? 
-                <React.Fragment>
-                    {hotitems.map((item) => {
-                        return (
-                            <div data-testid="hotproduct" key={item.productID}>
-                                <Link to={{
-                                            pathname: `/product/${item.productID}`,
-                                            state: {
-                                                item
-                                            }
-                                        }} key={item.productID} data-testid="Hot Item Link">
-                                    <HotItem src={item.images[0]} alt="Hot Item" />
-                                </Link>
-                            </div>
-                        )
-                    })}
-                </React.Fragment> :
-                <React.Fragment />
-            }
-            </HotItemSection> */}
+            
             {/* <div style={{backgroundColor: '#282828'}}>
             <h3 style={{margin: '0px', padding: '30px 0px', color: '#383838', fontWeight: '300'}}>Help</h3>
             </div> */}
@@ -148,4 +99,4 @@ const DesktopSidebar = (props) => {
     )
 }
 
-export default DesktopSidebar;
+export default DesktopSidebarView;

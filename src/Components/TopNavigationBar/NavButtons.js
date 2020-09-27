@@ -1,3 +1,4 @@
+/* NPM Modules */
 import React  from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -28,7 +29,6 @@ const Wrapper = styled.div`
 `;
 
 const NavButtons = (props) => {
-    const { history } = props;
     const backArrow = <FontAwesomeIcon icon={faAngleLeft} size="lg" />
     const forwardArrow = <FontAwesomeIcon icon={faAngleRight} size="lg" />
 
@@ -36,8 +36,8 @@ const NavButtons = (props) => {
         <React.Fragment>
             <Wrapper>
                 <div>
-                    <button onClick={() => history.goBack()}>{backArrow}</button>
-                    <button onClick={() => history.goForward()}>{forwardArrow}</button>
+                    <button>{backArrow}</button>
+                    <button>{forwardArrow}</button>
                 </div>
             </Wrapper>
         </React.Fragment>

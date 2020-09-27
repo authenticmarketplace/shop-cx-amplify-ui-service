@@ -1,9 +1,12 @@
+/* NPM Modules */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Menu, Logo, animate } from '../_components/styles.js';
-import { device } from '../_components/MediaQueries.js';
-import { img } from '../img/index.js';
+/* App Modules */
+import { Menu, Logo, animate } from '../_parts/styles.js';
+import { device } from '../_parts/MediaQueries.js';
+import { img } from '../../img/index.js';
+/* App Components */
 
 const MobileMenu = styled(Menu)`
   z-index: 1;

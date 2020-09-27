@@ -2,8 +2,8 @@ import React from 'react';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Section, Container, animate } from '../_components/styles.js';
-import { device, adjust } from '../_components/MediaQueries.js';
+import { Section, Container, animate } from '../_parts/styles.js';
+import { device, adjust } from '../_parts/MediaQueries.js';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 

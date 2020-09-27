@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useShoppingCart } from 'use-shopping-cart';
-import { device } from '../_components/MediaQueries.js';
+import { device } from '../_parts/MediaQueries.js';
 
 const ProductItem = styled.div`
     font-family: 'Lato', sans-serif;

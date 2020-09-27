@@ -1,10 +1,13 @@
+/* NPM Modules */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Menu, Logo, animate } from '../_components/styles.js';
-import { device } from '../_components/MediaQueries.js';
-import { img } from '../img/index.js';
-import NavButtons from '../_components/NavButtons.js';
+/* App Modules */
+import { Menu, Logo, animate } from '../_parts/styles.js';
+import { device } from '../_parts/MediaQueries.js';
+import { img } from '../../img/index.js';
+/* App Components */
+import NavButtons from './NavButtons.js';
 
 const LogoDiv = styled.div`
   display: ${props => props.displaylogo};
@@ -36,8 +39,8 @@ const StyledLinkDesktop = styled(Link)`
   text-decoration: none;
   display: inline-block;
   margin-right: 50px;
-  -webkit-animation: ${animate.fadeIn} 230ms linear;
-  animation: ${animate.fadeIn} 230ms linear;
+  ${'' /* -webkit-animation: ${animate.fadeIn} 230ms linear;
+  animation: ${animate.fadeIn} 230ms linear; */}
   background-color: #1e1e1e;
   border-radius: 12px;
 `;

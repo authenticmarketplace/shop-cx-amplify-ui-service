@@ -1,12 +1,13 @@
+/* NPM Modules */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useShoppingCart } from 'use-shopping-cart';
 import styled from 'styled-components';
-import HeaderMenu from '../HeaderMenu/index.js';
-import BagItems from './BagItems.js';
-import { Section, Container } from '../_components/styles.js';
-import { device } from '../_components/MediaQueries.js';
-
+/* App Modules */
+import { Section, Container } from '../_parts/styles.js';
+import { device } from '../_parts/MediaQueries.js';
+/* App Components */
+import TopNavigationBar from '../TopNavigationBar/index.js';
+import ShoppingBagItems from './ShoppingBagItems.js';
 
 const StyledSection = styled(Section)`
   padding-top: 90px;
@@ -73,7 +74,7 @@ const BagComponent = () => {
 
    return (
         <div>
-            <HeaderMenu link="/" linktext="Menu" columnmenu={true}/>
+            <TopNavigationBar columnmenu={true}/>
             <StyledSection>
                 <TestContainer>
                     <HeadingDiv>
@@ -89,7 +90,7 @@ const BagComponent = () => {
             <ProductSection>
                 <TestContainer>
                 {itemList.length > 0 ?
-                <BagItems itemList={itemList}/>
+                <ShoppingBagItems itemList={itemList}/>
                 : <h1>There are no items in your bag</h1>}
                 </TestContainer>
             </ProductSection>

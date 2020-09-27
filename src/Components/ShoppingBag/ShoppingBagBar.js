@@ -1,9 +1,12 @@
+/* NPM Modules */
+/* App Modules */
+/* App Components */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useShoppingCart } from 'use-shopping-cart'
-import { device, adjust } from '../_components/MediaQueries.js';
-import { animate } from '../_components/styles.js';
+import { device, adjust } from '../_parts/MediaQueries.js';
+import { animate } from '../_parts/styles.js';
 
 const Wrapper = styled.div`
  -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);

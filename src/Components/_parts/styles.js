@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-// import { device } from '../_components/MediaQueries.js';
 
 const slideUp = keyframes`
   0% {
@@ -33,8 +32,8 @@ export const Logo = styled.h1`
   text-transform: uppercase;
   color: white;
   display: inline-block;
-  -webkit-animation: ${animate.fadeIn} 230ms linear;
-  animation: ${animate.fadeIn} 230ms linear;
+  ${'' /* -webkit-animation: ${animate.fadeIn} 230ms linear;
+  animation: ${animate.fadeIn} 230ms linear; */}
 `;
 
 export const Section = styled.div`

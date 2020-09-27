@@ -1,7 +1,9 @@
+/* NPM Modules */
 import React from 'react';
-import { MenuWrapper } from '../_components/styles.js';
 import {useShoppingCart} from 'use-shopping-cart'
-
+/* App Modules */
+import { MenuWrapper } from '../_parts/styles.js';
+/* App Components */
 import DesktopMenu from './DesktopMenu.js';
 import MobileMenu from './MobileMenu.js';
 
