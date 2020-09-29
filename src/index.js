@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Amplify from 'aws-amplify';
+import { CartProvider } from 'use-shopping-cart'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +10,9 @@ Amplify.configure(config);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CartProvider mode="client-only" currency="USD">
+      <App />
+    </CartProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

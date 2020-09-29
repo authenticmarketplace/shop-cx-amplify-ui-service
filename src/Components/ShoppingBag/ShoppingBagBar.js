@@ -1,7 +1,12 @@
+/* NPM Modules */
+/* App Modules */
+/* App Components */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { device, adjust } from '../_components/MediaQueries.js';
-import { animate } from '../_components/styles.js';
+import { useShoppingCart } from 'use-shopping-cart'
+import { device, adjust } from '../_parts/MediaQueries.js';
+import { animate } from '../_parts/styles.js';
 
 const Wrapper = styled.div`
  -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -14,6 +19,9 @@ const Wrapper = styled.div`
     left: 0;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
+    @media ${device.tablet} {
+        display: ${props => props.mode.display}
+    }
    
 `;
 
@@ -65,15 +73,17 @@ const RightDiv = styled(LeftDiv)`
 
 const styles = {
     fixed: {
+        display: 'none',
         position: 'fixed',
         marginTop: '0px',
         innerView: {
-            width: '100%',
-            opacity: '.7',
+            width: '95%',
+            opacity: '1',
             transition: '.2s',
-            margin: '0px',
-            borderRadius: '17px 17px 0px 0px',
+            margin: '6px',
+            borderRadius: '17px',
             tablet: {
+                display: 'none',
                 width: '59%',
                 margin: '0px 0px 20px 16%',
                 borderRadius: '17px'
@@ -100,19 +110,22 @@ const styles = {
 
 const ShoppingBag = (props) => {
     const mode = props.mode && props.mode === 'fixed' ? styles.fixed : styles.static;
-    console.log(mode.innerView.margin)
+    const { cartCount } = useShoppingCart()
+
     return (
         <Wrapper mode={mode}>
-            <InnerView mode={mode}>
-                <LeftDiv>
-                    <h4>Bag</h4>
-                    <h4>(3)</h4>
-                </LeftDiv>
-                <RightDiv>
-                    <h4>Place Order</h4>
-                    <h4>&#62;</h4>
-                </RightDiv>
-            </InnerView>
+            <Link to="/bag">
+                <InnerView mode={mode}>
+                    <LeftDiv>
+                        <h4>Bag</h4>
+                        <h4>({cartCount})</h4>
+                    </LeftDiv>
+                    <RightDiv>
+                        <h4>Review Order</h4>
+                        <h4>&#62;</h4>
+                    </RightDiv>
+                </InnerView>
+            </Link>
         </Wrapper>
     )
 }

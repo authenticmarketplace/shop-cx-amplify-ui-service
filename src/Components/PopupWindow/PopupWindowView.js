@@ -1,9 +1,12 @@
+/* NPM Modules */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { adjust } from '../_components/MediaQueries.js';
-import { animate } from '../_components/styles.js';
-import { img, tempImg } from '../img/index.js';
+/* App Modules */
+import { adjust } from '../_parts/MediaQueries.js';
+import { animate } from '../_parts/styles.js';
+import { img, tempImg } from '../../img/index.js';
+/* App Components */
 
 const WrapperRound = styled.div`
   overflow: hidden;
@@ -120,22 +123,23 @@ const AppMenuWrapper = styled.div`
   animation: ${animate.fadeIn} 230ms linear;
 `;
 
-const AppMenu = () => {
-  return (
-      <WrapperRound bgimage={tempImg.jhene}>
-        <AppMenuWrapper>
-          <img style={{height: '85px'}} src={img.circlelogo} alt="logo"/>
-          {/* <h1>Authentic.shop</h1> */}
-          <div>
-            <ul>
-              <li><Link to='/browse' className="active">Browse</Link></li>
-              <li><Link to='/foryou'>For You</Link></li>
-              <li><Link to='/mystore'>My Store</Link></li>
-            </ul>
-          </div>
-        </AppMenuWrapper>
+const PopupWindowView = (props) => {
+    return (
+        <WrapperRound bgimage={tempImg.jhene}>
+            <AppMenuWrapper>
+                <img style={{height: '85px'}} src={img.circlelogo} alt="logo"/>
+                <h1>AUTHENTIC.SHOP</h1>
+                <h1>THANKS FOR SHOPPING WITH US</h1>
+                <div>
+                    <ul>
+                      <li><Link to='/' className="active">Browse</Link></li>
+                      <li><Link to='/foryou'>For You</Link></li>
+                      <li><Link to='/mystore'>My Store</Link></li>
+                    </ul>
+                </div>
+            </AppMenuWrapper>
       </WrapperRound>
-  );
+    )
 }
 
-export default AppMenu;
+export default PopupWindowView;

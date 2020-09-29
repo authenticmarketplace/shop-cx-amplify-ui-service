@@ -1,20 +1,24 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { useTransition, animated } from 'react-spring';
-import { Link } from 'react-router-dom';
-import { API } from 'aws-amplify';
-import { byIdentityOrientation, getProduct } from '../graphql/queries.js';
+/* NPM Modules */
+import React from 'react';
 import styled from 'styled-components';
-import { img } from '../img/index.js';
-import { device } from '../_components/MediaQueries.js';
-import { Section, Container } from '../_components/styles.js';
-import HeaderMenu from '../_components/HeaderMenuComponent.js';
-import ShoppingBag from '../ShoppingBag/index.js';
+import { Link } from 'react-router-dom';
+import { animated } from 'react-spring';
+/* App Modules */
+import { img } from '../../img/index.js';
+import { device } from '../_parts/MediaQueries.js';
+import { Section, Container } from '../_parts/styles.js';
+/* App Components */
+import TopNavigationBar from '../TopNavigationBar';
+import BottomNavigationBar from '../BottomNavigationBar';
+import ShoppingBag from '../ShoppingBag/ShoppingBagBar';
+import DesktopSidebar from '../DesktopSidebar';
 
 const StyledSection = styled(Section)`
-  padding-top: 90px;
+  padding-top: 60px;
   margin: 0px;
   @media ${device.tablet} {
-    padding-top: 115px;
+    padding-top: 95px;
+    margin-left: 20%;
   }
 `;
 
@@ -30,6 +34,9 @@ const ProductContainer = styled(Container)`
 const StyledSection2 = styled(Section)`
 padding-top: 0px;
 margin: 0px;
+@media ${device.tablet} {
+    margin-left: 20%;
+  }
 `;
 
 const ImgWrapper = styled(animated.div)`
@@ -122,6 +129,11 @@ const ProductContent = styled.div`
       padding: 5px 0px;
       border-radius: 80px;
       width: auto;
+      outline: none;
+      cursor: pointer;
+      :active {
+        transform: scale(0.98); 
+      }
     }
     @media ${device.tablet} {
       border-bottom-left-radius: 0px;
@@ -208,90 +220,27 @@ const MoreProducts = styled.div`
   }
 `;
 
-const initialState = {
-  item: {},
-  isLoading: true,
-  error: false
-}
+const MoreByBrand = styled.div`
+  color: white;
+`;
 
-const reducer = (state, action) => {
-  switch(action.type) {
-    case 'SET_ITEM':
-      return { ...state, item: action.item, isLoading: false }
-    case 'ERROR':
-      return { ...state, error: true }
-    default:
-      return state
-  }
-}
-
-const ProductInfoComponent = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const [more_products, setMoreProducts] = useState([]);
-
-  const [sliderIndex, setSliderIndex] = useState(0)
-  const onSliderClick = useCallback(() => setSliderIndex(n => (n + 1) % state.item.images.length), [state.item])
-  const transitions = useTransition(sliderIndex, p => p, {
-    from: { opacity: 0.7 },
-    enter: { opacity: 1 },
-    leave: { display: 'none' },
-  })
-
-  const requestProduct = async (id) => {
-    try {
-      console.log("requesting product item from API")
-      const productData = await API.graphql({
-        query: getProduct,
-        variables: { productID: id }
-      })
-      dispatch({ type: 'SET_ITEM', item: productData.data.getProduct })
-    }
-    catch(err) {
-      console.log(err)
-    }
-  }
-
-  const requestMoreProducts = async () => {
-    try {
-      console.log("requesting more products from API")
-      const productData = await API.graphql({
-        query: byIdentityOrientation,
-        variables: { identityOrientation: state.item.identityOrientation, limit: 4 }
-      })
-      setMoreProducts(productData.data.byIdentityOrientation.items);
-    }
-    catch(err) {
-      console.log(err);
-    }
-  }
-
-  useEffect(() => {
-    if(props.location.state === undefined) {
-      requestProduct(props.match.params.productID)
-    } else {
-      console.log("setting item from state")
-      dispatch({ type: 'SET_ITEM', item: props.location.state.item })
-    }
-  }, [])
-
-  useEffect(() => {
-    if(!state.isLoading) {
-      requestMoreProducts()
-    }
-  }, [state.isLoading])
-
-  return (   
-      <div style={{fontFamily: 'Poppins, sans-serif'}}>
-      <HeaderMenu link="/browse" linktext="Browse" columnmenu={true}/>
-      {state.isLoading ? <h1>Loading...</h1> :
+const ProductDetailsView = (props) => {
+  return (
+    <div style={{fontFamily: 'Poppins, sans-serif'}}>
+      <TopNavigationBar />
+      {/* <BottomNavigationBar /> */}
+      <DesktopSidebar />
+      {props.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 
         <StyledSection>
           <Container>
+          <div style={{textAlign: 'left', marginBottom: '10px'}}>
+          </div>
             <ProductRow>
-            {transitions.map(({ item, props, key }) => {
+            {props.transitions.map(({ item, p, key }) => {
               return (
-                <ImgWrapper style={props} onClick={onSliderClick} key={key}>
-                  <Img src={state.item.images[item]} style={{display:'block'}} alt="product" />
+                <ImgWrapper style={p} onClick={props.onSliderClick} key={key}>
+                  <Img src={props.item.images[item]} style={{display:'block'}} alt="product" />
                   <div style={{position: 'relative'}}>
                     <p style={{margin: '0px',padding: '0px', position: 'absolute', bottom: '0', left: '50%', fontSize: '10px', transform: 'translate(-50%, -50%)'}}>Tap for more</p>
                   </div>
@@ -300,10 +249,10 @@ const ProductInfoComponent = (props) => {
             })}
               <ProductContentWrapper>
                 <ProductContent>
-                  <h2>${state.item.price}</h2>
-                  <h3>{state.item.name}</h3>
-                  <p>{state.item.productCaption}</p>
-                  <button><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
+                  <h2>${props.item.price}</h2>
+                  <h3>{props.item.name}</h3>
+                  <p>{props.item.productCaption}</p>
+                  <button onClick={props.addProductToBag}><img src={img.bag} style={{width: '23%'}} alt="add to bag"/></button>
                 </ProductContent>
               </ProductContentWrapper>
             </ProductRow>
@@ -312,17 +261,18 @@ const ProductInfoComponent = (props) => {
         </StyledSection>
         <StyledSection2>
           <ProductContainer>
-            <MoreDetailsWrapper>                   
+            <MoreDetailsWrapper>
+            <div>             
               <BrandDetails>
               {/* <span style={{cursor: 'pointer',fontSize: '12px', fontWeight: '500', borderRadius: '16px', border: '1px solid white', padding: '0px 5px'}}>+</span> */}
-                <h3>{state.item.brand.displayName}</h3>
-                <h3><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {state.item.brand.designation}</h3>
-                <h3><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {state.item.brand.locale}</h3>
-                <p>{state.item.brand.bio}</p>
-              </BrandDetails>                    
+                <h3>{props.item.brand.displayName}</h3>
+                <h3><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {props.item.brand.designation}</h3>
+                <h3><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {props.item.brand.locale}</h3>
+                <p>{props.item.brand.bio}</p>
+              </BrandDetails>
               <MoreProducts>
-                <h4>More Like This</h4>
-                {more_products.map((product) => {
+                  <h4>Other products from {props.item.brand.brandID}</h4>
+                  {props.moreByBrand.map((product) => {
                   return (
                     <React.Fragment key={product.productID}>
                     <Link to={{
@@ -330,11 +280,34 @@ const ProductInfoComponent = (props) => {
                       state: {
                           item: product
                           }
-                      }} onClick={() => dispatch({ type: 'SET_ITEM', item: product })} style={{textDecoration: 'none'}} key={product.productID}>
+                      }} onClick={() => props.dispatch({ type: 'SET_ITEM', item: product })} style={{textDecoration: 'none'}} key={product.productID}>
                       <div style={{display: 'flex', flexDirection: 'column', }}>
                         <img src={product.images[0]} alt={product.name} />
                         <p style={{textDecoration: 'none'}}>{product.name} <br/> <span style={{fontWeight: '600'}}>{product.brand.displayName}</span></p>
                       </div>
+                    </Link>
+                    </React.Fragment>
+                  )
+                })}
+              </MoreProducts>               
+            </div>      
+              <MoreProducts>
+                <h4>More Like This</h4>
+                {props.more_products.map((product) => {
+                  return (
+                    <React.Fragment key={product.productID}>
+                    <Link to={{
+                      pathname: `/product/${product.productID}`,
+                      state: {
+                          item: product
+                          }
+                      }} onClick={() => {
+                        return props.dispatch({ type: 'SET_ITEM', item: product });
+                      }} style={{textDecoration: 'none'}} key={product.productID}>
+                        <div style={{display: 'flex', flexDirection: 'column', }}>
+                          <img src={product.images[0]} alt={product.name} />
+                          <p style={{textDecoration: 'none'}}>{product.name} <br/> <span style={{fontWeight: '600'}}>{product.brand.displayName}</span></p>
+                        </div>
                     </Link>
                     </React.Fragment>
                   )
@@ -346,7 +319,7 @@ const ProductInfoComponent = (props) => {
       </React.Fragment>
       }
       </div>
-  );
+  )
 }
 
-export default ProductInfoComponent;
+export default ProductDetailsView;

@@ -132,7 +132,14 @@ export const listBrands = /* GraphQL */ `
         bio
         logo
         products {
-          nextToken
+          items {
+            images
+            name
+            productID
+            brand {
+              displayName
+            }
+          }
         }
         createdAt
         updatedAt
@@ -378,7 +385,10 @@ export const byDesignation = /* GraphQL */ `
         bio
         logo
         products {
-          nextToken
+          items {
+            images
+            price
+          }
         }
         createdAt
         updatedAt
