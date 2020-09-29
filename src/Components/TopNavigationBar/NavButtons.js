@@ -1,5 +1,6 @@
 /* NPM Modules */
 import React  from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
@@ -32,13 +33,14 @@ const Wrapper = styled.div`
 const NavButtons = (props) => {
     const backArrow = <FontAwesomeIcon icon={faAngleLeft} size="lg" />
     const forwardArrow = <FontAwesomeIcon icon={faAngleRight} size="lg" />
+    const history = useHistory()
 
     return (
         <React.Fragment>
             <Wrapper>
                 <div>
-                    <button>{backArrow}</button>
-                    <button>{forwardArrow}</button>
+                    <button onClick={() => history.goBack()}>{backArrow}</button>
+                    <button onClick={() => history.goForward()}>{forwardArrow}</button>
                 </div>
             </Wrapper>
         </React.Fragment>

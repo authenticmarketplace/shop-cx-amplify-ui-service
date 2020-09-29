@@ -9,6 +9,7 @@ import ScrollToTop from './Components/_parts/ScrollToTop.js';
 import ForYou from './Components/ForYou/index.js';
 import MyStore from './Components/MyStore';
 import ShoppingBag from './Components/ShoppingBag/index.js';
+import PopupWindow from './Components/PopupWindow/index.js';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/foryou" component={ForYou} />
           <Route path="/mystore" component={MyStore} />
           <Route path="/bag" component={ShoppingBag} />
+          <Route path="/thanksforshopping" component={PopupWindow} />
           <Route path="/product/:productID" component={ProductDetails} id=":productID" />
         </Switch>
       </Router>

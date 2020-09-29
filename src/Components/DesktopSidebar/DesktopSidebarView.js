@@ -76,7 +76,7 @@ const Img = styled.img`
 const DesktopSidebarView = (props) => {
     return (
         <SideBarPanel>
-            <StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo>
+            <Link to="/thanksforshopping"><StyledLogo><Img src={img.circlelogo} alt="logo"/></StyledLogo></Link>
             <div style={{marginTop: '10px'}}>
             <SideBarButtonsSection>
                 <h4 style={{fontSize: '13px'}}>Explore</h4>

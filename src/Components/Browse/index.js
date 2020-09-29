@@ -50,6 +50,10 @@ const BrowseComponent = () => {
     }
   }
 
+  // const scrollTop = () =>{
+  //   window.scrollTo({top: 0, behavior: 'smooth'});
+  //  };
+
   useEffect(() => {
     request_products()
   }, [])

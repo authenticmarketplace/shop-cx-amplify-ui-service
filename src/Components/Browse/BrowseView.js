@@ -58,8 +58,8 @@ const Top = styled.div`
 animation: ${animate.fadeIn} 230ms linear;
 height: 40vh;
 width: 100%;
-background-image: url(${tempImg.idk3});
-background-position: bottom -100px right;
+background-image: url(${tempImg.collage});
+${'' /* background-position: bottom -100px right; */}
 background-size: cover;
 border-radius: 17px;
 div {

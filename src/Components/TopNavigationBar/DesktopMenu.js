@@ -40,10 +40,10 @@ const DesktopMenuComponent = (props) => {
     return (
     <React.Fragment>
         <DesktopMenu bringToTop={props.bringToTop}>
-          {/* <LogoDiv displaylogo={props.displaylogo}>
+          <LogoDiv displaylogo={props.displaylogo}>
             <img style={{height: '25px', display: 'inline-block', marginRight: '10px'}} src={img.circlelogo} alt="logo"/>
             <Link to="/"><Logo>Authentic.shop</Logo></Link>
-          </LogoDiv> */}
+          </LogoDiv>
           <div style={{marginTop: '20px'}}>
             <NavButtons />
             <OptionsTab />
