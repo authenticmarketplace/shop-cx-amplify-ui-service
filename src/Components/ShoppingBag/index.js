@@ -6,7 +6,7 @@ import { useShoppingCart } from 'use-shopping-cart';
 import ShoppingBagView from './ShoppingBagView.js';
 
 const BagComponent = () => {
-   const { cartCount, totalPrice, cartDetails } = useShoppingCart()
+   const { cartCount, cartDetails, totalPrice } = useShoppingCart()
    const [itemList, setItemList] = useState([])
 
    useEffect(() => {

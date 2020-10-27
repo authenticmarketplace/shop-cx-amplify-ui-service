@@ -18,7 +18,7 @@ const StyledSection = styled(Section)`
   margin: 0px;
   @media ${device.tablet} {
     padding-top: 95px;
-    margin-left: 20%;
+    margin-left: 18%;
   }
 `;
 
@@ -35,7 +35,7 @@ const StyledSection2 = styled(Section)`
 padding-top: 0px;
 margin: 0px;
 @media ${device.tablet} {
-    margin-left: 20%;
+    margin-left: 18%;
   }
 `;
 
@@ -61,6 +61,13 @@ const Img = styled.img`
   @media ${device.tablet} {
     border-top-right-radius: 0px;
     border-bottom-left-radius: 12px;
+    width: 290px;
+  }
+  @media ${device.laptop} {
+    width: 380px;
+  }
+  @media ${device.laptopL} {
+    width: 450px;
   }
 `;
 
@@ -122,6 +129,9 @@ const ProductContent = styled.div`
         margin-bottom: 23px;
         padding: 0px 25px;
         text-align: center;
+        color: white;
+        font-size: 14px;
+        font-family: 'Lato', sans-serif;
     }
     button {
       background-color: white;
@@ -142,19 +152,37 @@ const ProductContent = styled.div`
       padding: 0px;
       width: 300px;
       h2 {
-        margin-top: 120px;
+        margin-top: 45px;
+        font-size: 14px;
+        padding: 14px 11px;
+      }
+      h3 {
+        font-size: 16px;
       }
     }
     @media ${device.laptop} {
+      h2 {
+        margin-top: 90px;
+        padding: 16px 17px;
+        font-size: 16px;
+      }
+      h3 {
+        font-size: 18px;
+      }
       width: 400px;
+    }
+    @media ${device.laptopL} {
+      h2 {
+        margin-top: 120px;
+      }
     }
 `;
 
 const MoreDetailsWrapper = styled.div`
   margin-top: 30px;
-  @media ${device.tablet} {
+  @media ${device.laptop} {
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-between; 
     margin-top: 35px;
   }
 `;
@@ -168,15 +196,59 @@ const BrandDetails = styled.div`
   display: inline-block;
   border-radius: 12px;
   height: fit-content;
+  h3 {
+    ${'' /* text-decoration: underline; */}
+  }
+  h4 {
+    font-weight: 700;
+    margin: 0px;
+    margin-bottom: 5px;
+    color: white;
+  }
+  h5 {
+    font-weight: 300;
+    margin: 0px;
+  }
+  p {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    padding: 0px 5px;
+    line-height: 1.4;
+  }
+  div {
+    border: 1px solid #585858;
+    border-radius: 50%;
+    padding: 16px;
+  }
   @media ${device.mobileM} {
-    width: 360px;
+    width: 330px;
+    div {
+      margin: 0px 25px;
+      padding: 12px;
+    }   
   }
   @media ${device.tablet} {
     width: 450px;
+    div {
+      margin: 0px 50px;
+    }  
+  }
+  @media ${device.laptop} {
+    width: 400px;
+    div {
+      margin: 0px 50px;
+    }  
+  }
+  @media ${device.laptopL} {
+    width: 450px;
+    div {
+      margin: 0px 50px;
+    }  
   }
 `;
 
 const MoreProducts = styled.div`
+  display: inline-block;
   margin-top: 30px;
   font-family: 'Poppins', sans-serif;
   color: white;
@@ -185,6 +257,10 @@ const MoreProducts = styled.div`
   div {
     display: inline-block;
     margin: 0px 20px;
+    transition: 0.2s;
+    :hover {
+      transform: translateY(-5px);
+    }
     img {
       width: 100%;
       border-radius: 12px;
@@ -193,7 +269,6 @@ const MoreProducts = styled.div`
       padding: 10px 0px;
       margin-top: -7px;
       margin-bottom: 15px;
-      background-color: #282828;
       border-bottom-left-radius: 12px;
       border-bottom-right-radius: 12px;
       color: white;
@@ -217,7 +292,42 @@ const MoreProducts = styled.div`
   }
   @media ${device.tablet} {
     margin-top: 0px;
+    div {
+      margin: 0px 10px;
+    }
   }
+  @media ${device.laptop} {
+    div {
+      align-items: center;
+      img {
+        width: 70%
+      }
+    }
+  }
+  @media ${device.laptopL} {
+    div {
+      img {
+        width: 100%
+      }
+    }
+  }
+`;
+
+const ColumnWrapper = styled.div`
+  @media ${device.laptopL} {
+    display: inline-block;
+  }
+`;
+
+const ColumnWrapper2 = styled.div`
+  @media ${device.laptopL} {
+    display: inline-block;
+    width: 50%;
+  }
+`;
+
+const MoreProducts2 = styled(MoreProducts)`
+  display: inline-block;
 `;
 
 const MoreByBrand = styled.div`
@@ -237,10 +347,10 @@ const ProductDetailsView = (props) => {
           <div style={{textAlign: 'left', marginBottom: '10px'}}>
           </div>
             <ProductRow>
-            {props.transitions.map(({ item, p, key }) => {
+            {props.transitions.map((t) => {
               return (
-                <ImgWrapper style={p} onClick={props.onSliderClick} key={key}>
-                  <Img src={props.item.images[item]} style={{display:'block'}} alt="product" />
+                <ImgWrapper style={t.props} onClick={props.onSliderClick} key={t.key}>
+                  <Img src={props.item.images[t.item]} style={{display:'block'}} alt="product" />
                   <div style={{position: 'relative'}}>
                     <p style={{margin: '0px',padding: '0px', position: 'absolute', bottom: '0', left: '50%', fontSize: '10px', transform: 'translate(-50%, -50%)'}}>Tap for more</p>
                   </div>
@@ -262,12 +372,14 @@ const ProductDetailsView = (props) => {
         <StyledSection2>
           <ProductContainer>
             <MoreDetailsWrapper>
-            <div>             
+            <ColumnWrapper2>             
               <BrandDetails>
               {/* <span style={{cursor: 'pointer',fontSize: '12px', fontWeight: '500', borderRadius: '16px', border: '1px solid white', padding: '0px 5px'}}>+</span> */}
                 <h3>{props.item.brand.displayName}</h3>
-                <h3><img src={img.tag} style={{width: '13px', height: 'auto'}} alt="tag" /> {props.item.brand.designation}</h3>
-                <h3><img src={img.location} style={{width: '13px', height: 'auto'}} alt="location" /> {props.item.brand.locale}</h3>
+                <div>
+                  <h4>{props.item.brand.designation}</h4>
+                  <h5>Ships from {props.item.brand.locale}</h5>
+                </div>
                 <p>{props.item.brand.bio}</p>
               </BrandDetails>
               <MoreProducts>
@@ -281,7 +393,7 @@ const ProductDetailsView = (props) => {
                           item: product
                           }
                       }} onClick={() => props.dispatch({ type: 'SET_ITEM', item: product })} style={{textDecoration: 'none'}} key={product.productID}>
-                      <div style={{display: 'flex', flexDirection: 'column', }}>
+                      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                         <img src={product.images[0]} alt={product.name} />
                         <p style={{textDecoration: 'none'}}>{product.name} <br/> <span style={{fontWeight: '600'}}>{product.brand.displayName}</span></p>
                       </div>
@@ -290,9 +402,10 @@ const ProductDetailsView = (props) => {
                   )
                 })}
               </MoreProducts>               
-            </div>      
+            </ColumnWrapper2>
+            <ColumnWrapper>      
               <MoreProducts>
-                <h4>More Like This</h4>
+                <h4>Similar Items</h4>
                 {props.more_products.map((product) => {
                   return (
                     <React.Fragment key={product.productID}>
@@ -312,7 +425,8 @@ const ProductDetailsView = (props) => {
                     </React.Fragment>
                   )
                 })}
-              </MoreProducts>                  
+              </MoreProducts>
+            </ColumnWrapper>                
             </MoreDetailsWrapper>
           </ProductContainer>
         </StyledSection2>

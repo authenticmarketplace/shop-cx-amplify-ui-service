@@ -13,7 +13,7 @@ import DesktopSidebar from '../DesktopSidebar';
 import BottomNavigationBar from '../BottomNavigationBar/index.js';
 
 const StyledSection = styled(Section)`
-padding-top: 65px;
+padding-top: 55px;
 -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
 animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
 @media ${device.tablet} {
@@ -56,15 +56,17 @@ justify-content: center;
 const Top = styled.div`
 -webkit-animation: ${animate.fadeIn} 230ms linear;
 animation: ${animate.fadeIn} 230ms linear;
-height: 40vh;
+height: 12vh;
 width: 100%;
 background-image: url(${tempImg.collage});
 ${'' /* background-position: bottom -100px right; */}
 background-size: cover;
-border-radius: 17px;
+border-radius: 12px;
+margin-left: auto;
+margin-right: auto;
 div {
   position: absolute;
-  top: 30%;
+  top: 14%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -77,8 +79,10 @@ div {
 }
 @media ${device.tablet} {
   margin-top: 40px;
+  height: 30vh;
   div {
     left: 57.5%;
+    top: 25%;
   }
 }
 `;

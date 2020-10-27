@@ -7,15 +7,16 @@ import { device } from '../../_parts/MediaQueries.js';
 
 const ProductWrapper = styled.div`
     display: inline-block;
-    border-radius: 17px;
-    border-bottom-left-radius: 17px;
-    background-color: white;
+    ${'' /* border-radius: 17px; */}
+    ${'' /* border-bottom-left-radius: 17px; */}
+    ${'' /* background-color: white; */}
     margin: 10px 10px;
     width: auto;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12),
+    ${'' /* box-shadow: 0 1px 1px rgba(0,0,0,0.12),
               0 1px 1px rgba(0,0,0,0.12), 
               0 2px 2px rgba(0,0,0,0.12), 
-              0 4px 4px rgba(0,0,0,0.12);
+              0 4px 4px rgba(0,0,0,0.12); */}
+    transition: 0.3s;
     @media ${device.mobileM} {
         width: auto;
     }
@@ -27,6 +28,9 @@ const ProductWrapper = styled.div`
     }
     @media ${device.laptop} {
         width: 255px;
+    }
+    :hover {
+        transform: translateY(-10px);
     }
 `;
 
@@ -40,34 +44,34 @@ const ProductImg = styled.img`
     width: 100%;
     margin: 0px;
     padding: 0px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-radius: 12px;
 `;
 
 const ProductContentWrapper = styled.div`
     ${'' /* margin-top: -3px; */}
-    background-color: #202020;
-    padding: 10px 30px 50px 30px;
+    ${'' /* background-color: red; */}
+    padding: 10px 30px 10px 30px;
     text-align: left;
     display: block;
     color: white;
     font-family: 'Poppins', sans-serif;
-    border: 8px solid #202020;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    ${'' /* border: 8px solid #202020; */}
+    ${'' /* border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px; */}
     h2 {
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
-        background-color: white;
+        ${'' /* background-color: white; */}
         margin-top: 6px;
         display: inline-block;
-        padding: 15px 13px;
-        border-radius: 50px;
+        padding: 2px 13px;
+        border-radius: 7px;
         color: #404040;
         font-size: 13px;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+        background-color: white;
+        ${'' /* box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
               0 2px 2px rgba(0,0,0,0.12), 
-              0 4px 4px rgba(0,0,0,0.12);
+              0 4px 4px rgba(0,0,0,0.12); */}
     }
     h3 {
         font-size: 14px;

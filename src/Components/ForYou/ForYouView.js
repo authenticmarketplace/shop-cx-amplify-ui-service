@@ -7,7 +7,7 @@ import { device, adjust } from '../_parts/MediaQueries.js';
 import { tempImg } from '../../img/index.js';
 /* App Components */
 import TopNavigationBar from '../TopNavigationBar/index.js';
-import ContentItem from './ContentItem.js';
+import ContentLibrary from './ContentLibrary/ContentLibrary.js';
 import ShoppingBag from '../ShoppingBag/ShoppingBagBar.js';
 import DesktopSidebar from '../DesktopSidebar/';
 import BottomNavigationBar from '../BottomNavigationBar/index.js';
@@ -86,6 +86,19 @@ div {
 
 const Container100 = styled(Container)`
   width: 100%;
+  h2 {
+    font-family: 'Sansita Swashed', sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 27px;
+    margin: 15px 0px;
+  }
+  @media ${device.tablet} {
+    h2 {
+      text-align: left;
+      padding-left: 50px;
+    }
+  }
 `;
 
 const AroundTheWeb = styled.div`
@@ -115,27 +128,12 @@ const ForYouView = (props) => {
             <DesktopSidebar />
             <TopNavigationBar />
             <BottomNavigationBar />
-            {/* <StyledSection>
-                <Top>
-                    <div>
-                        <h1>For You</h1>
-                    </div>
-                </Top>
-            </StyledSection> */}
-            {/* <StyledSection>
-              <ContentWrapper>
-                <ContentItem title="Trending" items={props.trending} />
-                <ContentItem title="This week's deals" items={props.trending} />
-              </ContentWrapper>
-            </StyledSection> */}
             <StyledSection>
               <Container100>
-                <h3>Around the web</h3>
-                <AroundTheWeb>
-                  <iframe src="https://miilkiina.com/" title="Miilkiina" />
-                  <iframe style={{backgroundColor: 'white'}} src="https://paper-journal.com/" title="Paper Journal" />
-                  <iframe style={{backgroundColor: 'white'}} src="https://flaunt.com/" title="Flaunt" />
-                </AroundTheWeb>
+                <ContentLibrary />
+                
+                {/* <SelectedForYou />
+                <Trending /> */}
               </Container100>
             </StyledSection>
         </React.Fragment>
@@ -143,3 +141,12 @@ const ForYouView = (props) => {
 }
 
 export default ForYouView;
+
+
+
+// <h3>Around the web</h3>
+// <AroundTheWeb>
+//   <iframe src="https://miilkiina.com/" title="Miilkiina" />
+//   <iframe style={{backgroundColor: 'white'}} src="https://paper-journal.com/" title="Paper Journal" />
+//   <iframe style={{backgroundColor: 'white'}} src="https://flaunt.com/" title="Flaunt" />
+// </AroundTheWeb>

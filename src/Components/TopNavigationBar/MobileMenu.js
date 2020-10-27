@@ -11,10 +11,12 @@ import OptionsTab from './OptionsTab.js';
 
 const StyledLogo = styled(Logo)`
   font-size: 13px;
+  text-align: center;
 `;
 
 const MobileMenu = styled(Menu)`
   background-color: #1e1e1e;
+  padding-top: 10px;
   z-index: 1;
   display: flex;
   justify-content: space-around;
@@ -25,16 +27,17 @@ const MobileMenu = styled(Menu)`
 
 const ColLeft = styled.div`
   display: flex;
-  align-items: flex-start;
-  margin-top: 16px;
+  align-items: center;
+  margin-top: 0px;
   padding: 0px;
   h1 {
     margin-top: 0px;
+    margin-bottom: 0px;
   }
   img {
     -webkit-animation: ${animate.fadeIn} 230ms linear;
     animation: ${animate.fadeIn} 230ms linear;
-    height: 25px;
+    height: 20px;
     display: inline-block;
     margin-right: 10px;
   }
@@ -50,8 +53,12 @@ const MobileMenuComponent = (props) => {
     <React.Fragment>
         <MobileMenu>
             <ColLeft>
-                <img src={img.circlelogo} alt="logo"/>
-                <Link to="/"><StyledLogo>Authentic.shop</StyledLogo></Link>
+                <div>
+                  <img style={{paddingTop: '6px'}} src={img.circlelogo} alt="logo"/>
+                </div>
+                <div>
+                  <Link to="/"><StyledLogo>Authentic Marketplace</StyledLogo></Link>
+                </div>
             </ColLeft>
             <ColRight>
                 <OptionsTab />

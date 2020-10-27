@@ -2,8 +2,8 @@ import React from 'react';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Section, Container, animate } from '../_parts/styles.js';
-import { device, adjust } from '../_parts/MediaQueries.js';
+import { Section, Container, animate } from '../../_parts/styles.js';
+import { device, adjust } from '../../_parts/MediaQueries.js';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
@@ -14,7 +14,7 @@ const ItemWrapper = styled.div`
     text-align: center !important;
   }
   @media ${device.tablet} {
-    width: 40%;
+    width: 100%;
     h3 {
       font-size: 17px;
     }
@@ -45,22 +45,41 @@ const ItemDiv = styled.div`
   }
 `;
 
-const ContentItem = ({ title, items }) => {
+const ContentItemWrapper = styled.div`
+  margin: 0px 0px;
+  @media ${device.tablet} {
+    margin: 0px 20px;
+  }
+`;
+
+const ContentItem = styled.iframe`
+    width: 100%;
+    height: 515px;
+    border-radius: 20px;
+  @media ${device.tablet} {
+    width: 90%;
+    height: 215px;
+    border-radius: 20px;
+  }
+`;
+
+const ContentLibrary = (props) => {
+  const contentList = ["https://www.youtube.com/embed/pwDr7yfuErE", "https://www.youtube.com/embed/UqrW0-OUExc", "https://www.youtube.com/embed/fwmrAgmfVk8", "https://www.youtube.com/embed/UOrv5ZSbTIY"];
     const settings = {
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 5000,
         dots: false,
         pauseOnHover: true,
         pauseOnFocus: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 1,
+        slidesToShow: 3,
         slidesToScroll: 1,
         responsive: [
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 1,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 infinite: true,
                 dots: true
@@ -69,7 +88,7 @@ const ContentItem = ({ title, items }) => {
             {
               breakpoint: 600,
               settings: {
-                slidesToShow: 1,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 initialSlide: 1
               }
@@ -84,27 +103,44 @@ const ContentItem = ({ title, items }) => {
           ]
       };
     return (
-      <ItemWrapper>
-        <h3>{title}</h3>
-          <Slider {...settings}>
-            {items.map((item, i) => {
-              return (
-                <ItemDiv>
-                  <img src={item.images[0]} style={{display: 'inline-block'}}/>
-                  <div>
-                      <p style={{paddingRight: '10px'}}>${item.price}</p>
-                      <p>{item.brand.displayName}</p>
-                  </div>
-                </ItemDiv>
-                )
-            })}
-          </Slider>
-      </ItemWrapper>
+      <div>
+        <div>
+         <h2>Suggested Content</h2>
+        </div>
+        <Slider {...settings}>
+          {contentList.map((item, i) => {
+            return (
+              <ContentItemWrapper>
+                <ContentItem src={item} frameBorder="0" allowFullScreen></ContentItem>
+              </ContentItemWrapper>
+            )
+          })}
+        </Slider>
+      </div>
     )
 }
 
-export default ContentItem;
+export default ContentLibrary;
 
+{/* <ContentWrapper>
+  <ContentLibrary items={props.trending} />
+</ContentWrapper>
+<ItemWrapper>
+<h3>{title}</h3>
+<Slider {...settings}>
+  {items.map((item, i) => {
+    return (
+      <ItemDiv>
+        <img src={item.images[0]} style={{display: 'inline-block'}}/>
+        <div>
+            <p style={{paddingRight: '10px'}}>${item.price}</p>
+            <p>{item.brand.displayName}</p>
+        </div>
+      </ItemDiv>
+      )
+  })}
+</Slider>
+</ItemWrapper> */}
 
 
 
@@ -232,3 +268,10 @@ export default ContentItem;
 // }
 
 // export default ItemRow;
+
+
+// <img src={item.images[0]} style={{display: 'inline-block'}}/>
+//                 <div>
+//                     <p style={{paddingRight: '10px'}}>${item.price}</p>
+//                     <p>{item.brand.displayName}</p>
+//                 </div>
