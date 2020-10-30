@@ -26,7 +26,7 @@ export const animate = {
 }
 
 export const Logo = styled.h1`
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-weight: 800;
   font-size: 17px;
   text-transform: uppercase;

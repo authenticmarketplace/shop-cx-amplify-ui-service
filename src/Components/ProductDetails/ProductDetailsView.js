@@ -9,9 +9,9 @@ import { device } from '../_parts/MediaQueries.js';
 import { Section, Container } from '../_parts/styles.js';
 /* App Components */
 import TopNavigationBar from '../TopNavigationBar';
-import BottomNavigationBar from '../BottomNavigationBar';
 import ShoppingBag from '../ShoppingBag/ShoppingBagBar';
 import DesktopSidebar from '../DesktopSidebar';
+import MobileBackButton from '../MobileBackButton/index.js';
 
 const StyledSection = styled(Section)`
   padding-top: 60px;
@@ -210,7 +210,7 @@ const BrandDetails = styled.div`
     margin: 0px;
   }
   p {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Rubik', sans-serif;
     text-align: center;
     padding: 0px 5px;
     line-height: 1.4;
@@ -338,7 +338,7 @@ const ProductDetailsView = (props) => {
   return (
     <div style={{fontFamily: 'Poppins, sans-serif'}}>
       <TopNavigationBar />
-      {/* <BottomNavigationBar /> */}
+      <MobileBackButton />
       <DesktopSidebar />
       {props.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 

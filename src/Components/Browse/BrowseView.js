@@ -76,6 +76,10 @@ div {
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   font-size: 12px;
+  h1 {
+    -webkit-animation: ${animate.fadeIn} 1230ms linear;
+    animation: ${animate.fadeIn} 1230ms linear;
+  }
 }
 @media ${device.tablet} {
   margin-top: 40px;

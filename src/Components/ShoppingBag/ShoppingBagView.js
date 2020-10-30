@@ -10,6 +10,7 @@ import ShoppingBagItems from './ShoppingBagItems.js';
 import DesktopSidebar from '../DesktopSidebar/';
 import BottomNavigationBar from '../BottomNavigationBar/index.js';
 import DesktopSidebarView from '../DesktopSidebar/DesktopSidebarView.js';
+import MobileBackButton from '../MobileBackButton/index.js';
 
 const StyledSection = styled(Section)`
   padding-top: 60px;
@@ -160,7 +161,7 @@ const ShoppingBagView = (props) => {
     return (
         <React.Fragment>
             <TopNavigationBar />
-            {/* <BottomNavigationBar /> */}
+            <MobileBackButton />
             <DesktopSidebar />
             <StyledSection>
                 <BagWrapper>
