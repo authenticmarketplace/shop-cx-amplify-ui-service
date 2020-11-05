@@ -8,6 +8,7 @@ body {
   background-color: #1e1e1e;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  scroll-behavior: smooth;
 }
 
 body::-webkit-scrollbar {
@@ -17,4 +18,8 @@ body::-webkit-scrollbar {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+  outline:none;
 }

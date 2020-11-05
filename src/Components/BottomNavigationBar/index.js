@@ -1,7 +1,8 @@
 /* NPM Modules */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 /* App Modules */
 import { device } from '../_parts/MediaQueries.js';
 /* App Components */
@@ -36,13 +37,19 @@ const ButtonTab = styled(Link)`
 `;
 
 const BottomNavigationBar = () => {
+    
+    const goToTop = (e) => {
+        if(e.target.href === window.location.href) {
+            scroll.scrollToTop();
+        }
+    }
     return (
         <React.Fragment>
             <OuterWrapper>
                 <InnerWrapper>
-                    <ButtonTab to="/">Browse</ButtonTab>
-                    <ButtonTab to="/foryou">For You</ButtonTab>
-                    <ButtonTab to="mystore">My Store</ButtonTab>
+                    <ButtonTab to="/" onClick={(e) => goToTop(e)}>Browse</ButtonTab>
+                    <ButtonTab to="/foryou" onClick={(e) => goToTop(e)}>For You</ButtonTab>
+                    <ButtonTab to="mystore" onClick={(e) => goToTop(e)}>My Store</ButtonTab>
                 </InnerWrapper>
             </OuterWrapper>
         </React.Fragment>

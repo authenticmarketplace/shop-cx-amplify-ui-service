@@ -12,6 +12,7 @@ import TopNavigationBar from '../TopNavigationBar';
 import ShoppingBag from '../ShoppingBag/ShoppingBagBar';
 import DesktopSidebar from '../DesktopSidebar';
 import MobileBackButton from '../MobileBackButton/index.js';
+import ScrollUpButton from '../ScrollUpButton/index.js';
 
 const StyledSection = styled(Section)`
   padding-top: 60px;
@@ -340,6 +341,7 @@ const ProductDetailsView = (props) => {
       <TopNavigationBar />
       <MobileBackButton />
       <DesktopSidebar />
+      <ScrollUpButton />
       {props.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 
         <StyledSection>

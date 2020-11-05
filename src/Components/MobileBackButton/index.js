@@ -43,13 +43,13 @@ const ButtonTab = styled.button`
 const MobileBackButton = (props) => {
     const backArrow = <FontAwesomeIcon icon={faAngleLeft} size="lg" />
     const history = useHistory()
-    const [transformState, setTransformState] = useState('translateY(64px)')
+    const [transformState, setTransformState] = useState('translateY(75px)')
 
     const updateTransform = () =>  {
         if(window.scrollY > 10) {
             setTransformState('translateY(0px)') 
         } else {
-            setTransformState('translateY(64px)')
+            setTransformState('translateY(75px)')
         }
     }
 

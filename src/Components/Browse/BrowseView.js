@@ -11,6 +11,7 @@ import TopNavigationBar from '../TopNavigationBar';
 import ProductDetailCard from '../ProductDetails/ProductDetailCard';
 import DesktopSidebar from '../DesktopSidebar';
 import BottomNavigationBar from '../BottomNavigationBar/index.js';
+import ScrollUpButton from '../ScrollUpButton/index.js';
 
 const StyledSection = styled(Section)`
 padding-top: 55px;
@@ -98,6 +99,7 @@ const BrowsePage = (props) => {
             <DesktopSidebar />
             <TopNavigationBar />
             <BottomNavigationBar />
+            <ScrollUpButton />
             <StyledSection>
                 <Top>
                     <div>
