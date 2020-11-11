@@ -19,7 +19,7 @@ function App() {
         <ScrollToTop/>
         <Switch>
           <Route path="/" exact component={Browse} />
-          <Route path="/foryou" component={ForYou} />
+          <Route path="/discovery" component={ForYou} />
           <Route path="/mystore" component={MyStore} />
           <Route path="/bag" component={ShoppingBag} />
           <Route path="/thanksforshopping" component={PopupWindow} />

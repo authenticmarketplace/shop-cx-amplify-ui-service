@@ -24,7 +24,7 @@ yarn-error.log*
 
 notes.txt
 tempProducts.js
-src/img
+# src/img
 mockProps
 
 

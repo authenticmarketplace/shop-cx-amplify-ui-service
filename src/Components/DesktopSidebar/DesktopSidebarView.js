@@ -83,7 +83,7 @@ const DesktopSidebarView = (props) => {
             <SideBarButtonsSection>
                 <h4 style={{fontSize: '13px'}}>Explore</h4>
                 <SidebarButton to="/">Browse</SidebarButton>
-                <SidebarButton to="/foryou">For You</SidebarButton>
+                <SidebarButton to="/discovery">Discovery</SidebarButton>
                 <SidebarButton to="/mystore">My Store</SidebarButton>
             </SideBarButtonsSection>
             </div>

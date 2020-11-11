@@ -60,7 +60,7 @@ const ForYouComponent = () => {
     getDeals()
   }, [])
     return (
-        <ForYouView trending={trending} deals={deals} />
+        <ForYouView trending={trending} />
     );
 }
 

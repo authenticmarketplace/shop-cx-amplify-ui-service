@@ -8,9 +8,9 @@ import { tempImg } from '../../img/index.js';
 /* App Components */
 import TopNavigationBar from '../TopNavigationBar/index.js';
 import ContentLibrary from './ContentLibrary/ContentLibrary.js';
-import ShoppingBag from '../ShoppingBag/ShoppingBagBar.js';
 import DesktopSidebar from '../DesktopSidebar/';
 import BottomNavigationBar from '../BottomNavigationBar/index.js';
+import TopSelections from './TopSelections'
 
 const ImgWrapper = styled(Section)`
   -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -130,10 +130,9 @@ const ForYouView = (props) => {
             <BottomNavigationBar />
             <StyledSection>
               <Container100>
+                <TopSelections items={props.trending}/>
                 <ContentLibrary />
-                
-                {/* <SelectedForYou />
-                <Trending /> */}
+                {/* <TopSelections items={props.trending}/> */}
               </Container100>
             </StyledSection>
         </React.Fragment>

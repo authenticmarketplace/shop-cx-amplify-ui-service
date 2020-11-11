@@ -52,6 +52,13 @@ const ContentItemWrapper = styled.div`
   }
 `;
 
+const BackgroundWrapper = styled.div`
+  margin-top: 20px;
+  background-color: #282828;
+  padding: 13px 12px 55px 12px;
+  border-radius: 12px;
+`;
+
 const ContentItem = styled.iframe`
     width: 100%;
     height: 515px;
@@ -103,11 +110,11 @@ const ContentLibrary = (props) => {
           ]
       };
     return (
-      <div>
+      <BackgroundWrapper>
         <div>
          <h2>Suggested Content</h2>
         </div>
-        <Slider {...settings}>
+        <Slider {...settings} style={{width: '96%', display: 'inline-block'}}>
           {contentList.map((item, i) => {
             return (
               <ContentItemWrapper>
@@ -116,7 +123,7 @@ const ContentLibrary = (props) => {
             )
           })}
         </Slider>
-      </div>
+      </BackgroundWrapper>
     )
 }
 
@@ -124,8 +131,8 @@ export default ContentLibrary;
 
 {/* <ContentWrapper>
   <ContentLibrary items={props.trending} />
-</ContentWrapper>
-<ItemWrapper>
+</ContentWrapper> */}
+{/* <ItemWrapper>
 <h3>{title}</h3>
 <Slider {...settings}>
   {items.map((item, i) => {
