@@ -48,7 +48,7 @@ const BottomNavigationBar = () => {
             <OuterWrapper>
                 <InnerWrapper>
                     <ButtonTab to="/" onClick={(e) => goToTop(e)}>Browse</ButtonTab>
-                    <ButtonTab to="/foryou" onClick={(e) => goToTop(e)}>For You</ButtonTab>
+                    <ButtonTab to="/discovery" onClick={(e) => goToTop(e)}>For You</ButtonTab>
                     <ButtonTab to="mystore" onClick={(e) => goToTop(e)}>My Store</ButtonTab>
                 </InnerWrapper>
             </OuterWrapper>
