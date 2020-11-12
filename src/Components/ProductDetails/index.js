@@ -1,5 +1,5 @@
 /* NPM Modules */
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
+import React, { useState, useEffect, useReducer, useCallback, useRef } from 'react';
 import { useTransition } from 'react-spring';
 import { API } from 'aws-amplify';
 import { useShoppingCart } from 'use-shopping-cart';
@@ -30,6 +30,7 @@ const ProductInfoComponent = (props) => {
   const [more_products, setMoreProducts] = useState([]);
   const [moreByBrand, setMoreByBrand] = useState([]);
   const { addItem } = useShoppingCart()
+  const aref = useRef(null)
 
   const [sliderIndex, setSliderIndex] = useState(0)
   const onSliderClick = useCallback(() => setSliderIndex(n => (n + 1) % state.item.images.length), [state.item])
@@ -90,6 +91,7 @@ const ProductInfoComponent = (props) => {
       image: state.item.images[0],
     }
     addItem(product)
+    aref.current(`${state.item.name} from ${state.item.brand.displayName} has been added to your order`)
   }
 
   useEffect(() => {
@@ -118,6 +120,7 @@ const ProductInfoComponent = (props) => {
         onSliderClick={onSliderClick}
         addProductToBag={addProductToBag}
         dispatch={dispatch}
+        aref={aref}
       />
   );
 }
