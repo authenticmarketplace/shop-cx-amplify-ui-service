@@ -20,7 +20,7 @@ const ForYouComponent = () => {
       try {
         const productData = await API.graphql({
           query: byIdentityOrientation,
-          variables: { identityOrientation: 'Unisex', limit: 8 }
+          variables: { identityOrientation: 'Unisex', limit: 7 }
         })
         setTrending(productData.data.byIdentityOrientation.items)
         localStorage.byIdentityOrientation = JSON.stringify(productData.data.byIdentityOrientation.items)

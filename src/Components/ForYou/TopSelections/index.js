@@ -92,8 +92,8 @@ const TopSelections = (props) => {
             <ItemDiv>
                 <img src={item.images[0]} style={{display: 'inline-block'}}/>
                 <div>
-                    <p style={{paddingRight: '10px'}}>${item.price}</p>
-                    <p>{item.brand.displayName}</p>
+                    <p style={{paddingRight: '10px', fontWeight: '700'}}>${item.price}</p>
+                    <p style={{fontWeight: '700'}}>{item.brand.displayName}</p>
                 </div>
             </ItemDiv>
             )
