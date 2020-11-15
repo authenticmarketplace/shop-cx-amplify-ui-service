@@ -39,7 +39,6 @@ const BrowseComponent = () => {
         })
         console.log("Completed Products Request via API - Products Retrieved @ " + Date.now())
         dispatch({ type: 'SET_PRODUCTS', products: products.data.listProducts.items })
-        console.log(products.data.listProducts.items)
         localStorage.allProducts = JSON.stringify(products.data.listProducts.items)
         localStorage.productRequestCount = 1;
         console.log("Created Product Request Count in Local Storage")
