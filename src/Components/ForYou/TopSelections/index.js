@@ -8,7 +8,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ItemWrapper = styled.div`
-  width: 35%;
+  width: 100%;
+  margin: 60px 0px;
   h3 {
     font-size: 10px;
     text-align: center !important;
@@ -26,7 +27,7 @@ const ItemDiv = styled.div`
   ${'' /* margin: 5px 16px;  */}
   img {
     display: block;
-    width: 100%;
+    width: 90%;
     border-radius: 12px;
   }
   p {
@@ -47,29 +48,29 @@ const ItemDiv = styled.div`
 
 const TopSelections = (props) => {
     const settings = {
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 5000,
         dots: false,
         pauseOnHover: true,
         pauseOnFocus: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         responsive: [
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 3,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 infinite: true,
-                dots: true
+                dots: false
               }
             },
             {
               breakpoint: 600,
               settings: {
-                slidesToShow: 3,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 initialSlide: 1
               }
@@ -77,7 +78,7 @@ const TopSelections = (props) => {
             {
               breakpoint: 480,
               settings: {
-                slidesToShow: 1,
+                slidesToShow: 3,
                 slidesToScroll: 1
               }
             }
@@ -89,13 +90,17 @@ const TopSelections = (props) => {
         <Slider {...settings}>
         {props.items.map((item, i) => {
             return (
-            <ItemDiv>
-                <img src={item.images[0]} style={{display: 'inline-block'}}/>
-                <div>
-                    <p style={{paddingRight: '10px', fontWeight: '700'}}>${item.price}</p>
-                    <p style={{fontWeight: '700'}}>{item.brand.displayName}</p>
-                </div>
-            </ItemDiv>
+            <Link to={{
+                              pathname: `/product/${item.productID}`,
+                              state: {
+                                  item,
+                                  state: props.products
+                              }
+                          }}>
+              <ItemDiv>
+                  <img src={item.images[0]} style={{display: 'inline-block'}}/>
+              </ItemDiv>
+            </Link>
             )
         })}
         </Slider>

@@ -12,6 +12,7 @@ const OuterWrapper = styled.div`
     bottom: 0;
     width: 100%;
     text-align: center;
+    z-index: 999;
     @media ${device.tablet} {
         display: none;
     }
@@ -48,7 +49,7 @@ const BottomNavigationBar = () => {
             <OuterWrapper>
                 <InnerWrapper>
                     <ButtonTab to="/" onClick={(e) => goToTop(e)}>Browse</ButtonTab>
-                    <ButtonTab to="/discovery" onClick={(e) => goToTop(e)}>For You</ButtonTab>
+                    <ButtonTab to="/discovery" onClick={(e) => goToTop(e)}>Discovery</ButtonTab>
                     <ButtonTab to="mystore" onClick={(e) => goToTop(e)}>My Store</ButtonTab>
                 </InnerWrapper>
             </OuterWrapper>

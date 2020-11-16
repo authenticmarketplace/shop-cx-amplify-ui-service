@@ -47,21 +47,25 @@ const ItemDiv = styled.div`
 
 const ContentItemWrapper = styled.div`
   margin: 0px 0px;
+  h3 {
+    font-size: 14px;
+  }
   @media ${device.tablet} {
     margin: 0px 20px;
   }
 `;
 
 const BackgroundWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 90px;
   background-color: #282828;
-  padding: 13px 12px 55px 12px;
+  padding: 13px 12px 15px 12px;
   border-radius: 12px;
+  margin-bottom: 75px;
 `;
 
 const ContentItem = styled.iframe`
     width: 100%;
-    height: 515px;
+    height: 250px;
     border-radius: 20px;
   @media ${device.tablet} {
     width: 90%;
@@ -71,7 +75,24 @@ const ContentItem = styled.iframe`
 `;
 
 const ContentLibrary = (props) => {
-  const contentList = ["https://www.youtube.com/embed/pwDr7yfuErE", "https://www.youtube.com/embed/UqrW0-OUExc", "https://www.youtube.com/embed/fwmrAgmfVk8", "https://www.youtube.com/embed/UOrv5ZSbTIY"];
+  const contentList = [
+    {
+      url: 'https://www.youtube.com/embed/pwDr7yfuErE',
+      type: 'Music'
+    },
+    {
+      url: 'https://www.youtube.com/embed/UqrW0-OUExc',
+      type: 'Music'
+    },
+    {
+      url: 'https://www.youtube.com/embed/fwmrAgmfVk8',
+      type: 'Music'
+     },
+     { 
+       url: 'https://www.youtube.com/embed/UOrv5ZSbTIY',
+       type: 'Music'
+     }
+    ];
     const settings = {
         autoplay: false,
         autoplaySpeed: 5000,
@@ -118,7 +139,8 @@ const ContentLibrary = (props) => {
           {contentList.map((item, i) => {
             return (
               <ContentItemWrapper>
-                <ContentItem src={item} frameBorder="0" allowFullScreen></ContentItem>
+                <ContentItem src={item.url} frameBorder="0" allowFullScreen></ContentItem>
+                <h3 style={{paddingLeft: '25px'}}>{item.type}</h3>
               </ContentItemWrapper>
             )
           })}
