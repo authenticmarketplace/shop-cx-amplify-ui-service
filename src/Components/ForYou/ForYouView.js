@@ -155,25 +155,32 @@ const FeaturedBrand = styled.div`
   border-radius: 4px;
   color: white;
   font-weight: 700;
-  padding: 0px 0px 20px 0px;
+  padding: 5px 0px 28px 0px;
   margin-bottom: 20px;
+  text-align: left;
   h4 {
     margin: 12px 19px;
-    text-align: center;
     font-size: 15px;
     color: white;
+    margin-bottom: 18px;
+  }
+  div {
+    padding-left: 20px;
   }
   img {
-    height: 180px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
   }
   button {
-    background-color: #e1b300;
+    background-color: transparent;
+    color: lightblue;
     border: 0px;
-    color: white;
     border-radius: 8px;
-    padding: 6px 16px;
-    font-weight: 800;
+    padding: 6px 0px;
+    font-weight: 400;
     font-weight: 'Rubik', sans-serif;
+    cursor: pointer;
   }
   @media ${device.mobileM} {
     img {
@@ -187,7 +194,7 @@ const FeaturedBrand = styled.div`
   }
   @media ${device.tablet} {
     width: 40%;
-    margin: 0px;
+    margin: 0px 10px;
     img {
        height: 160px;
     }
@@ -236,16 +243,29 @@ const ForYouView = (props) => {
               <Container100>
                 <ContentWrapper>
                     <FeaturedBrand>
-                      <h4>Featured</h4>
+                      <h4>For her</h4>
+                      <img src={tempImg.purse} />
+                      <div>
+                        <p>Curated Holiday Gifts She'll Love</p>
+                        <button>See More</button>
+                      </div>
+                    </FeaturedBrand>
+                    <FeaturedBrand>
+                      <h4>Trending Items</h4>
+                      <img src={tempImg.overdoz} />
+                      <div>
+                        <p>New heat for your next order</p>
+                        <button>Shop Trending</button>
+                      </div>
+                    </FeaturedBrand>
+                    <FeaturedBrand>
+                      <h4>Featured Brand</h4>
                       <img src={tempImg.bw00} />
                       <div>
                         <p>Places + Faces</p>
                         <button>Discover</button>
                       </div>
                     </FeaturedBrand>
-                    <CuratedSlider>
-                      <Curated />
-                    </CuratedSlider>
                   </ContentWrapper>
                   <TopSelections items={props.trending}/>
                   <ContentLibrary />

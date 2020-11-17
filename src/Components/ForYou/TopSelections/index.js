@@ -9,7 +9,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ItemWrapper = styled.div`
   width: 100%;
-  margin: 60px 0px;
+  margin: 30px 0px;
+  background-color: #282828;
+  padding: 13px 0px 39px 0px;
+  border-radius: 7px;
   h3 {
     font-size: 10px;
     text-align: center !important;
@@ -56,13 +59,13 @@ const TopSelections = (props) => {
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         responsive: [
             {
               breakpoint: 1024,
               settings: {
                 slidesToShow: 4,
-                slidesToScroll: 1,
+                slidesToScroll: 2,
                 infinite: true,
                 dots: false
               }
@@ -71,7 +74,7 @@ const TopSelections = (props) => {
               breakpoint: 600,
               settings: {
                 slidesToShow: 4,
-                slidesToScroll: 1,
+                slidesToScroll: 2,
                 initialSlide: 1
               }
             },
@@ -79,7 +82,7 @@ const TopSelections = (props) => {
               breakpoint: 480,
               settings: {
                 slidesToShow: 3,
-                slidesToScroll: 1
+                slidesToScroll: 2
               }
             }
           ]

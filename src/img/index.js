@@ -14,7 +14,9 @@ import saucony1 from './resized/saucony1.png';
 import blackkids from '../img/guy-kids-1.png';
 import collage from '../img/collage1.png';
 import bag2 from '../img/bag1.png';
-import grande from '../img/grande.jpg'
+import grande from '../img/grande.jpg';
+import purse from '../img/product2.gif';
+import overdoz from '../img/product.png';
 
 const osaka = 'http://a.espncdn.com/media/motion/2019/0308/dm_190307_osaka_interview697/dm_190307_osaka_interview697.jpg';
 const idk1 = 'https://66.media.tumblr.com/602ea91053c636a0a88595649c0db594/tumblr_pfp4as2Gnz1runkfoo1_1280.jpg';
@@ -51,5 +53,8 @@ export const tempImg = {
     idk5,
     jhene,
     collage,
-    bw00: grande
+    bw00: grande,
+    chanel: 'https://images.unsplash.com/photo-1587304189289-8701c98d53bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80',
+    purse,
+    overdoz
 }

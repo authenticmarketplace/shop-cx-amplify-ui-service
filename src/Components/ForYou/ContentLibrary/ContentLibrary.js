@@ -56,10 +56,10 @@ const ContentItemWrapper = styled.div`
 `;
 
 const BackgroundWrapper = styled.div`
-  margin-top: 90px;
+  margin-top: 30px;
   background-color: #282828;
   padding: 13px 12px 15px 12px;
-  border-radius: 12px;
+  border-radius: 7px;
   margin-bottom: 75px;
 `;
 
@@ -133,7 +133,7 @@ const ContentLibrary = (props) => {
     return (
       <BackgroundWrapper>
         <div>
-         <h2>Suggested Content</h2>
+         <h2>Content you might like</h2>
         </div>
         <Slider {...settings} style={{width: '96%', display: 'inline-block'}}>
           {contentList.map((item, i) => {
