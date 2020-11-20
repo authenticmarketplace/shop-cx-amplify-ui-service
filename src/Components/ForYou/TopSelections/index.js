@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ItemWrapper = styled.div`
   width: 100%;
-  margin: 30px 0px;
   background-color: #282828;
   padding: 13px 0px 39px 0px;
   border-radius: 7px;
@@ -18,6 +17,7 @@ const ItemWrapper = styled.div`
     text-align: center !important;
   }
   @media ${device.tablet} {
+    margin: 30px 0px;
     width: 100%;
     h3 {
       font-size: 17px;
@@ -31,7 +31,7 @@ const ItemDiv = styled.div`
   img {
     display: block;
     width: 90%;
-    border-radius: 12px;
+    border-radius: 50%;
   }
   p {
       display: inline-block;
