@@ -8,12 +8,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ItemWrapper = styled.div`
-  width: 35%;
+  width: 100%;
+  background-color: #282828;
+  padding: 13px 0px 39px 0px;
+  border-radius: 7px;
   h3 {
     font-size: 10px;
     text-align: center !important;
   }
   @media ${device.tablet} {
+    margin: 30px 0px;
     width: 100%;
     h3 {
       font-size: 17px;
@@ -26,8 +30,8 @@ const ItemDiv = styled.div`
   ${'' /* margin: 5px 16px;  */}
   img {
     display: block;
-    width: 100%;
-    border-radius: 12px;
+    width: 90%;
+    border-radius: 50%;
   }
   p {
       display: inline-block;
@@ -47,38 +51,38 @@ const ItemDiv = styled.div`
 
 const TopSelections = (props) => {
     const settings = {
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 5000,
         dots: false,
         pauseOnHover: true,
         pauseOnFocus: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToShow: 4,
+        slidesToScroll: 2,
         responsive: [
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
+                slidesToShow: 4,
+                slidesToScroll: 2,
                 infinite: true,
-                dots: true
+                dots: false
               }
             },
             {
               breakpoint: 600,
               settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
+                slidesToShow: 4,
+                slidesToScroll: 2,
                 initialSlide: 1
               }
             },
             {
               breakpoint: 480,
               settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
+                slidesToShow: 3,
+                slidesToScroll: 2
               }
             }
           ]
@@ -89,13 +93,17 @@ const TopSelections = (props) => {
         <Slider {...settings}>
         {props.items.map((item, i) => {
             return (
-            <ItemDiv>
-                <img src={item.images[0]} style={{display: 'inline-block'}}/>
-                <div>
-                    <p style={{paddingRight: '10px'}}>${item.price}</p>
-                    <p>{item.brand.displayName}</p>
-                </div>
-            </ItemDiv>
+            <Link to={{
+                              pathname: `/product/${item.productID}`,
+                              state: {
+                                  item,
+                                  state: props.products
+                              }
+                          }}>
+              <ItemDiv>
+                  <img src={item.images[0]} style={{display: 'inline-block'}}/>
+              </ItemDiv>
+            </Link>
             )
         })}
         </Slider>

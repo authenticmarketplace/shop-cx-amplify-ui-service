@@ -13,6 +13,7 @@ import ShoppingBag from '../ShoppingBag/ShoppingBagBar';
 import DesktopSidebar from '../DesktopSidebar';
 import MobileBackButton from '../MobileBackButton/index.js';
 import ScrollUpButton from '../ScrollUpButton/index.js';
+import NotificationSpring from '../NotificationSpring/index.js';
 
 const StyledSection = styled(Section)`
   padding-top: 60px;
@@ -143,7 +144,7 @@ const ProductContent = styled.div`
       outline: none;
       cursor: pointer;
       :active {
-        transform: scale(0.98); 
+        transform: scale(0.98);
       }
     }
     @media ${device.tablet} {
@@ -342,6 +343,7 @@ const ProductDetailsView = (props) => {
       <MobileBackButton />
       <DesktopSidebar />
       <ScrollUpButton />
+      <NotificationSpring children={add => (props.aref.current = add)} />
       {props.isLoading ? <h1>Loading...</h1> :
       <React.Fragment> 
         <StyledSection>

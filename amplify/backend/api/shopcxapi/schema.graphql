@@ -1,4 +1,5 @@
-type Product @model 
+type Product @model
+@auth(rules: [{ allow: public, operations: [read] }])
 @key(fields: ["productID"])
 @key(name: "brandIDIndex", fields: ["brandID"])
 @key(name: "byPrice", fields: ["baseType", "price"], queryField: "byPrice")
@@ -20,7 +21,8 @@ type Product @model
   baseType: String!
 }
 
-type Brand @model 
+type Brand @model
+@auth(rules: [{ allow: public, operations: [read] }])
 @key(fields: ["brandID"])
 @key(name: "byLocale", fields: ["locale"], queryField: "byLocale")
 @key(name: "byDesignation", fields: ["designation"], queryField: "byDesignation")

@@ -385,10 +385,7 @@ export const byDesignation = /* GraphQL */ `
         bio
         logo
         products {
-          items {
-            images
-            price
-          }
+          nextToken
         }
         createdAt
         updatedAt
