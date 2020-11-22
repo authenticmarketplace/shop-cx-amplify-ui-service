@@ -11,7 +11,7 @@ const ForYouComponent = () => {
   const [deals, setDeals] = useState([]);
 
   const getTrending = async () => {
-    if(localStorage.productRequestCount && localStorage.productRequestCount < 10500) {
+    if(localStorage.byIdentityOrientation && localStorage.productRequestCount < 10500) {
       setTrending(JSON.parse(localStorage.byIdentityOrientation))
       localStorage.productRequestCount++;
       console.log("Set Products from Local Storage - Product Request Count is: " + localStorage.productRequestCount)
@@ -20,7 +20,7 @@ const ForYouComponent = () => {
       try {
         const productData = await API.graphql({
           query: byIdentityOrientation,
-          variables: { identityOrientation: 'Unisex', limit: 8 }
+          variables: { identityOrientation: 'Unisex', limit: 7 }
         })
         setTrending(productData.data.byIdentityOrientation.items)
         localStorage.byIdentityOrientation = JSON.stringify(productData.data.byIdentityOrientation.items)
@@ -33,7 +33,7 @@ const ForYouComponent = () => {
   }
 
   const getDeals = async () => {
-    if(localStorage.productRequestCount && localStorage.productRequestCount < 10500) {
+    if(localStorage.byDesignation && localStorage.productRequestCount < 10500) {
       setDeals(JSON.parse(localStorage.byDesignation))
       localStorage.productRequestCount++;
       console.log("Set Products from Local Storage - Product Request Count is: " + localStorage.productRequestCount)

@@ -47,6 +47,9 @@ const ItemDiv = styled.div`
 
 const ContentItemWrapper = styled.div`
   margin: 0px 0px;
+  h3 {
+    font-size: 14px;
+  }
   @media ${device.tablet} {
     margin: 0px 20px;
   }
@@ -55,14 +58,21 @@ const ContentItemWrapper = styled.div`
 const BackgroundWrapper = styled.div`
   margin-top: 20px;
   background-color: #282828;
-  padding: 13px 12px 55px 12px;
-  border-radius: 12px;
+  padding: 13px 12px 15px 12px;
+  border-radius: 7px;
+  margin-bottom: 75px;
 `;
 
 const ContentItem = styled.iframe`
     width: 100%;
-    height: 515px;
+    height: 150px;
     border-radius: 20px;
+  @media ${device.mobileM} {
+    height: 175px;
+  }
+  @media ${device.mobileL} {
+    height: 190px;
+  }
   @media ${device.tablet} {
     width: 90%;
     height: 215px;
@@ -71,7 +81,24 @@ const ContentItem = styled.iframe`
 `;
 
 const ContentLibrary = (props) => {
-  const contentList = ["https://www.youtube.com/embed/pwDr7yfuErE", "https://www.youtube.com/embed/UqrW0-OUExc", "https://www.youtube.com/embed/fwmrAgmfVk8", "https://www.youtube.com/embed/UOrv5ZSbTIY"];
+  const contentList = [
+    {
+      url: 'https://www.youtube.com/embed/pwDr7yfuErE',
+      type: 'Music'
+    },
+    {
+      url: 'https://www.youtube.com/embed/UqrW0-OUExc',
+      type: 'Music'
+    },
+    {
+      url: 'https://www.youtube.com/embed/fwmrAgmfVk8',
+      type: 'Music'
+     },
+     { 
+       url: 'https://www.youtube.com/embed/UOrv5ZSbTIY',
+       type: 'Music'
+     }
+    ];
     const settings = {
         autoplay: false,
         autoplaySpeed: 5000,
@@ -112,13 +139,14 @@ const ContentLibrary = (props) => {
     return (
       <BackgroundWrapper>
         <div>
-         <h2>Suggested Content</h2>
+         <h2>Content you might like</h2>
         </div>
         <Slider {...settings} style={{width: '96%', display: 'inline-block'}}>
           {contentList.map((item, i) => {
             return (
               <ContentItemWrapper>
-                <ContentItem src={item} frameBorder="0" allowFullScreen></ContentItem>
+                <ContentItem src={item.url} frameBorder="0" allowFullScreen></ContentItem>
+                <h3 style={{paddingLeft: '25px'}}>{item.type}</h3>
               </ContentItemWrapper>
             )
           })}
