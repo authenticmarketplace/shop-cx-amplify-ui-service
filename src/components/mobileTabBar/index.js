@@ -1,1 +1,0 @@
-export { default as MobileTabBar } from './mobileTabBar-view';

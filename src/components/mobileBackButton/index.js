@@ -1,1 +1,0 @@
-export { default as MobileBackButton } from './mobileBackButton-view';

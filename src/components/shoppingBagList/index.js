@@ -1,1 +1,0 @@
-export { default as ShoppingBagList } from './shoppingBagList-view'
