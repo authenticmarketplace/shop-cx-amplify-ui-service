@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import { device } from '../../components/globals/media-breakpoints.js';
-import { Section, Container } from '../../components/globals/styles.js';
+import { Section, Container, animate } from '../../components/globals/styles.js';
 
 export const StyledSection = styled(Section)`
   padding-top: 60px;
   margin: 0px;
+  -webkit-animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: ${animate.slideUp} 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
   @media ${device.tablet} {
     padding-top: 95px;
     margin-left: 18%;
