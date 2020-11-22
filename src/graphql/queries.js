@@ -136,6 +136,8 @@ export const listBrands = /* GraphQL */ `
             images
             name
             productID
+            price
+            productCaption
             brand {
               displayName
             }

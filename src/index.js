@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Amplify from 'aws-amplify';
 import { CartProvider } from 'use-shopping-cart'
-import './index.css';
-import App from './App';
+import App from './app';
 import * as serviceWorker from './serviceWorker';
 import config from './aws-exports.js';
+import './index.css';
 Amplify.configure({
   ...config,
   aws_appsync_authenticationType: 'API_KEY',

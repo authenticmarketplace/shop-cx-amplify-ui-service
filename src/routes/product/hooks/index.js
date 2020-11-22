@@ -1,0 +1,1 @@
+export { default as useProductItem } from './use-product-item';

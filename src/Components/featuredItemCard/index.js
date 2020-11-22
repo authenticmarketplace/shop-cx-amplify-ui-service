@@ -1,0 +1,1 @@
+export { default as FeaturedItemCard } from './featuredItemCard-view';
