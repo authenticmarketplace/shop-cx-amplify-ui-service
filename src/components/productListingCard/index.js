@@ -1,0 +1,1 @@
+export { default as ProductListingCard } from './productListingCard-view';

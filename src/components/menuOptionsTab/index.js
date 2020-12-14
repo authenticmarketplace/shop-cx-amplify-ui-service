@@ -1,0 +1,1 @@
+export { default as MenuOptionsTab } from './menuOptionsTabs-view';
