@@ -1,5 +1,3 @@
-### This project will not run without a valid API key. If you're interested in seeing this project live, [get in touch](mailto:dylan@authenticdigital.tech) and I'd be happy to walk you through a test experience as well as any of the code in the project
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
