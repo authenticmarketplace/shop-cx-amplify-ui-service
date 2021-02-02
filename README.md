@@ -4,6 +4,9 @@ Authentic Marketplace is an internet store and shopping marketplace  for quality
 # Shop-CX-Amplify-Service
 This repo contains code for the customer experience platform. The project is currently a work in progress and some features on the site may be incomplete.
 
+# Demo
+[Link](https://dev.authentic.shop)
+
 # File Structure
 To better optimize development as components and routes grow, I began following [this file structure](https://charles-stover.medium.com/optimal-file-structure-for-react-applications-f3e35ad0a145) for the application. It allows for easy separation of route-specific file development and component specific file development, and allows for component-related code to remain grouped together. Each folder in the `routes` folder corresponds to a route that displays that route's page in the application. Each folder in the `components` folder represents a reusable react component. To make it easier to follow the `container component / presentaional component` way of developing react components, each route and component contains an `index.js` file that only contains an export statement. More on this topic is discussed in the file structure topic in the link above.
 
