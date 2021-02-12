@@ -6,10 +6,7 @@ import App from './app';
 import * as serviceWorker from './serviceWorker';
 import config from './aws-exports.js';
 import './index.css';
-Amplify.configure({
-  ...config,
-  aws_appsync_authenticationType: 'API_KEY',
-});
+Amplify.configure(config);
 
 ReactDOM.render(
   <React.StrictMode>

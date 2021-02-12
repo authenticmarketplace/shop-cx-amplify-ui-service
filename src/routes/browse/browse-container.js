@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { API } from 'aws-amplify';
 import { listProducts } from '../../graphql/queries.js';
 import BrowseView from './browse-view';
@@ -22,6 +22,7 @@ const reducer = (state, action) => {
 
 const BrowseContainer = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [welcome, setWelcome ] = useState(true);
 
   const request_products = async () => {
     if(localStorage.productRequestCount && localStorage.productRequestCount < 10500) {
@@ -51,7 +52,7 @@ const BrowseContainer = () => {
 
   return (
     <React.Fragment>
-      <BrowseView isLoading={state.isLoading} products={state.products} requestProducts={request_products}/>
+      <BrowseView welcome={welcome} setWelcome={setWelcome} isLoading={state.isLoading} products={state.products} requestProducts={request_products}/>
     </React.Fragment>
   );
 }
